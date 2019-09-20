@@ -3,10 +3,31 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title - @Application.Name</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-
+    <link href="~/Content/Site.css" rel="stylesheet" />
+    <meta name="description" content="@ViewBag.Description">
+    @* Author - (Optional) Used by search engines. The author of the page. *@
+    @if (ViewBag.Author != null)
+    {
+        <meta name="author" content="@ViewBag.Author">
+    }
+    @* Render Twitter Card meta tags. *@
+    @if (ViewBag.TwitterCard != null)
+    {
+        @Html.TwitterCard((TwitterCard)ViewBag.TwitterCard);
+    }
+    @* Render Facebook Open Graph meta tags. *@
+    @if (ViewBag.OpenGraph != null)
+    {
+        @Html.OpenGraph((OpenGraphMetadata)ViewBag.OpenGraph);
+    }
+    @* Render the Referrer meta tag for increased privacy. *@
+    @if (ViewBag.ReferrerMode != null)
+    {
+        @Html.ReferrerMeta((ReferrerMode)ViewBag.ReferrerMode)
+    }
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -17,13 +38,13 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Safari Norte", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("Nosotros", "About", "Home")</li>
+                    <li>@Html.ActionLink("Contacto", "Contact", "Home")</li>
                 </ul>
                 @Html.Partial("_MenuPartial")
                 @Html.Partial("_LoginPartial")
@@ -34,7 +55,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <p>&copy; @DateTime.Now.Year - Safari Norte</p>
         </footer>
     </div>
 

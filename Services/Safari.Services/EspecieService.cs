@@ -1,14 +1,15 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ServiceModel;
-using Safari.Business;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using Safari.Entities;
-using Safari.Services;
 using Safari.Services.Contracts;
+using Safari.Business;
+using System.ServiceModel;
 
 namespace Safari.Services
-{    
+{
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerCall, ConcurrencyMode = ConcurrencyMode.Multiple)]
     public class EspecieService : IServices<Especie>
     {
@@ -18,10 +19,10 @@ namespace Safari.Services
             bc.Actualizar(entity);
         }
 
-        public Especie Agregar(Especie especie)
+        public Especie Agregar(Especie Especie)
         {
             var bc = new EspecieComponent();
-            return bc.Agregar(especie);
+            return bc.Agregar(Especie);
         }
 
         public void Eliminar(int id)

@@ -61,10 +61,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ClienteProcess.cs" />
     <Compile Include="EspecieProcess.cs" />
+    <Compile Include="MascotaProcess.cs" />
     <Compile Include="MediaType.cs" />
     <Compile Include="ProcessComponent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SalaProcess.cs" />
+    <Compile Include="TipoMovimientoProcess.cs" />
+    <Compile Include="TipoServicioProcess.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Services\Safari.Services.Contracts\Safari.Services.Contracts.csproj">

@@ -40,9 +40,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ClienteService.cs" />
     <Compile Include="EspecieService.cs" />
     <Compile Include="IServices.cs" />
+    <Compile Include="MascotaService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SalaService.cs" />
+    <Compile Include="TipoMovimientoService.cs" />
+    <Compile Include="TipoServicioService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Business\Safari.Business\Safari.Business.csproj">

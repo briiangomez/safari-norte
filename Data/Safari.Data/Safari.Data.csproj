@@ -46,10 +46,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ClienteDAC.cs" />
     <Compile Include="DataAccessComponent.cs" />
     <Compile Include="EspecieDAC.cs" />
     <Compile Include="IRepository.cs" />
+    <Compile Include="MascotaDAC.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SalaDAC.cs" />
+    <Compile Include="TipoMovimientoDAC.cs" />
+    <Compile Include="TipoServicioDAC.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

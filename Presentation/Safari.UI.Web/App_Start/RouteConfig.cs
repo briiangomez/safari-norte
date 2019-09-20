@@ -11,13 +11,22 @@ namespace Safari.UI.Web
     {
         public static void RegisterRoutes(RouteCollection routes)
         {
+
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+
             );
+
+            routes.MapRoute(
+    name: "AdminAuthorization",
+    url: "Admin/{controller}/{action}",
+    defaults: new { controller = "Dashboard", action = "Index", id = UrlParameter.Optional },
+    namespaces: new string[] { "Safari.UI.Web.Areas.Admin.Controllers" }
+);
         }
     }
 }
