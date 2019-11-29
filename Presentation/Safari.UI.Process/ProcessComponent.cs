@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Web;
 
+
 namespace Safari.UI.Process
 {
     /// <summary>
@@ -85,7 +86,7 @@ namespace Safari.UI.Process
 
         public static T HttpPost<T>(string path, T value, string mediaType)
         {
-           
+
             var pathAndQuery = path.EndsWith("/") ? path : path += "/";
             T result = default(T);
             using (var client = new HttpClient())
@@ -100,5 +101,39 @@ namespace Safari.UI.Process
             }
             return result;
         }
+
+        public static T HttpPost<T, Trequest>(string path, Trequest value, string mediaType)
+        {
+            var pathAndQuery = path.EndsWith("/") ? path : path += "/";
+            T result = default(T);
+            using (var client = new HttpClient())
+            {
+                Type typeOft = typeof(T);
+                client.BaseAddress = new Uri(ConfigurationManager.AppSettings["serviceUrl"]);
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(mediaType));
+
+                var response = client.PostAsJsonAsync(pathAndQuery, value).Result;
+                response.EnsureSuccessStatusCode();
+                result = response.Content.ReadAsAsync<T>().Result;
+            }
+            return result;
+        }
+
+        public static void HttpDelete<T>(string path, T value, string mediaType)
+        {
+            var pathAndQuery = path.EndsWith("/") ? path : path += "/";
+            T result = default(T);
+            using (var client = new HttpClient())
+            {
+                Type typeOft = typeof(T);
+                client.BaseAddress = new Uri(ConfigurationManager.AppSettings["serviceUrl"]);
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(mediaType));
+
+                var response = client.PostAsJsonAsync(pathAndQuery, value).Result;
+                response.EnsureSuccessStatusCode();
+                result = response.Content.ReadAsAsync<T>().Result;
+            }
+        }
     }
 }
+

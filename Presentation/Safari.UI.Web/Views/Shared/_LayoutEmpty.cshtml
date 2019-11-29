@@ -1,0 +1,27 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    <meta name="x-font-awesome-stylesheet-fallback-test" class="fa">
+    @Styles.Render("~/Content/fa")
+    @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/Content/fancybox")
+   
+</head>
+<body style="padding: 10px!important;">
+    <div>
+        @RenderBody()
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jqueryvalunobtrusive")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/site")
+    @Scripts.Render("~/bundles/fancybox")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
+

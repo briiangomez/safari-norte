@@ -1,49 +1,34 @@
-﻿using Microsoft.Practices.EnterpriseLibrary.Data;
-using Safari.Entities;
 using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.Common;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Data;
+using System.Data.Common;
+using Microsoft.Practices.EnterpriseLibrary.Data;
+using Safari.Entities;
 
 namespace Safari.Data
 {
-    public class TipoMovimientoDAC : DataAccessComponent, IRepository<TipoMovimiento>
+    public partial class TipoMovimientoDAC : DataAccessComponent, IRepository<TipoMovimiento>
     {
-        public TipoMovimiento Create(TipoMovimiento entity)
+        public TipoMovimiento Create(TipoMovimiento TipoMovimiento)
         {
-            const string SQL_STATEMENT = @"INSERT INTO dbo.TipoMovimiento (Nombre, Multiplicador)
-                                            SELECT @Nombre, @Multiplicador; SELECT SCOPE_IDENTITY();";
+            const string SQL_STATEMENT = "INSERT INTO TipoMovimiento ([Nombre], [Multiplicador]) VALUES(@Nombre, @Multiplicador); SELECT SCOPE_IDENTITY();";
 
             var db = DatabaseFactory.CreateDatabase(CONNECTION_NAME);
             using (DbCommand cmd = db.GetSqlStringCommand(SQL_STATEMENT))
             {
-                db.AddInParameter(cmd, "@Nombre", DbType.AnsiString, entity.Nombre);
-                db.AddInParameter(cmd, "@Multiplicador", DbType.Int16, entity.Multiplicador);
-                entity.Id = Convert.ToInt32(db.ExecuteScalar(cmd));
+                db.AddInParameter(cmd, "@Nombre", DbType.AnsiString, TipoMovimiento.Nombre);
+                db.AddInParameter(cmd, "@Multiplicador", DbType.Int16, TipoMovimiento.Multiplicador);
+                TipoMovimiento.Id = Convert.ToInt32(db.ExecuteScalar(cmd));
             }
-            return entity;
+            return TipoMovimiento;
         }
-
-        public void Delete(int id)
-        {
-            const string SQL_STATEMENT = @"DELETE
-                                            FROM   dbo.TipoMovimiento
-                                            WHERE  Id = @Id";
-            var db = DatabaseFactory.CreateDatabase(CONNECTION_NAME);
-            using (DbCommand cmd = db.GetSqlStringCommand(SQL_STATEMENT))
-            {
-                db.AddInParameter(cmd, "@Id", DbType.Int32, id);
-                db.ExecuteNonQuery(cmd);
-            }
-        }
-
+		
         public List<TipoMovimiento> Read()
         {
-            const string SQL_STATEMENT = @"SELECT Id, Nombre, Multiplicador 
-                                            FROM   dbo.TipoMovimiento";
+            const string SQL_STATEMENT = "SELECT [Id], [Nombre], [Multiplicador] FROM TipoMovimiento ";
 
             List<TipoMovimiento> result = new List<TipoMovimiento>();
             var db = DatabaseFactory.CreateDatabase(CONNECTION_NAME);
@@ -53,20 +38,18 @@ namespace Safari.Data
                 {
                     while (dr.Read())
                     {
-                        TipoMovimiento especie = LoadTipoMovimiento(dr);
-                        result.Add(especie);
+                        TipoMovimiento TipoMovimiento = LoadTipoMovimiento(dr);
+                        result.Add(TipoMovimiento);
                     }
                 }
             }
             return result;
         }
-
+		
         public TipoMovimiento ReadBy(int id)
         {
-            const string SQL_STATEMENT = @"SELECT Id, Nombre, Multiplicador 
-                                            FROM   dbo.TipoMovimiento
-                                            WHERE  Id = @Id ";
-            TipoMovimiento entidad = null;
+            const string SQL_STATEMENT = "SELECT [Id], [Nombre], [Multiplicador] FROM TipoMovimiento WHERE [Id]=@Id ";
+            TipoMovimiento TipoMovimiento = null;
 
             var db = DatabaseFactory.CreateDatabase(CONNECTION_NAME);
             using (DbCommand cmd = db.GetSqlStringCommand(SQL_STATEMENT))
@@ -76,39 +59,46 @@ namespace Safari.Data
                 {
                     if (dr.Read())
                     {
-                        entidad = LoadTipoMovimiento(dr);
+                        TipoMovimiento = LoadTipoMovimiento(dr);
                     }
                 }
             }
-            return entidad;
+            return TipoMovimiento;
         }
-
-        public void Update(TipoMovimiento entity)
+		
+        public void Update(TipoMovimiento TipoMovimiento)
         {
-            const string SQL_STATEMENT = @"UPDATE dbo.TipoMovimiento
-                                    SET    Nombre = @Nombre, Multiplicador = @Multiplicador
-                                    WHERE  Id = @Id";
+            const string SQL_STATEMENT = "UPDATE TipoMovimiento SET [Nombre]= @Nombre, [Multiplicador]= @Multiplicador WHERE [Id]= @Id ";
 
             var db = DatabaseFactory.CreateDatabase(CONNECTION_NAME);
             using (DbCommand cmd = db.GetSqlStringCommand(SQL_STATEMENT))
             {
-                db.AddInParameter(cmd, "@Nombre", DbType.AnsiString, entity.Nombre);
-                db.AddInParameter(cmd, "@Multiplicador", DbType.Int16, entity.Multiplicador);
-                db.AddInParameter(cmd, "@Id", DbType.Int32, entity.Id);
+                db.AddInParameter(cmd, "@Nombre", DbType.AnsiString, TipoMovimiento.Nombre);
+                db.AddInParameter(cmd, "@Multiplicador", DbType.Int16, TipoMovimiento.Multiplicador);
+                db.AddInParameter(cmd, "@Id", DbType.Int32, TipoMovimiento.Id);
                 db.ExecuteNonQuery(cmd);
             }
         }
-
+		
+        public void Delete(int id)
+        {
+            const string SQL_STATEMENT = "DELETE TipoMovimiento WHERE [Id]= @Id ";
+            var db = DatabaseFactory.CreateDatabase(CONNECTION_NAME);
+            using (DbCommand cmd = db.GetSqlStringCommand(SQL_STATEMENT))
+            {
+                db.AddInParameter(cmd, "@Id", DbType.Int32, id);
+                db.ExecuteNonQuery(cmd);
+            }
+        }
+		
         private TipoMovimiento LoadTipoMovimiento(IDataReader dr)
         {
-            TipoMovimiento entidad = new TipoMovimiento
-            {
-                Id = GetDataValue<int>(dr, "Id"),
-                Nombre = GetDataValue<string>(dr, "Nombre"),
-                Multiplicador = GetDataValue<int>(dr, "Multiplicador")
-            };
-            return entidad;
+            TipoMovimiento TipoMovimiento = new TipoMovimiento();
+            TipoMovimiento.Id = GetDataValue<int>(dr, "Id");
+            TipoMovimiento.Nombre = GetDataValue<string>(dr, "Nombre");
+            TipoMovimiento.Multiplicador = GetDataValue<Int16>(dr, "Multiplicador");
+            return TipoMovimiento;
         }
     }
-
 }
+

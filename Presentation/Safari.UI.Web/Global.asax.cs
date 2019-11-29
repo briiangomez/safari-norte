@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Safari.Framework.Common;
+using Safari.Framework.Logging;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -16,6 +18,10 @@ namespace Safari.UI.Web
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            var log = ServiceFactory.Get<ILoggingService>();
+            log.Initialise(10000);
+            log.Log("Init Application Start");
         }
     }
 }

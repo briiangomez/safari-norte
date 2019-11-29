@@ -1,0 +1,52 @@
+﻿@model Safari.Entities.Sala
+
+@{
+    ViewBag.Title = "Nueva";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutEmpty.cshtml";
+}
+
+
+
+@using (Html.BeginForm("createSala")) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="">
+        <h4>Nueva Sala</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Nombre, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Nombre, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TipoSala, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("TipoSala", new List<SelectListItem>
+                 {
+                    new SelectListItem{ Text="Quirófano", Value = "Quirófano" },
+                    new SelectListItem{ Text="Recuperación", Value = "Recuperación" },
+                    new SelectListItem{ Text="Vacunatorio", Value = "Vacunatorio" }
+                 },
+                    "Seleccione Tipo",
+                    new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.TipoSala, "", new { @class = "text-danger" }) 
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input style="margin-right: 10px" type="submit" value="Crear" class="btn btn-sm btn-success" onclick="if ($('#Nombre').val()!='') {parent.jQuery.fancybox.close(); }" />
+                <input type="button" value="Volver" class="btn btn-sm btn-info" onclick="parent.jQuery.fancybox.close()" />
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

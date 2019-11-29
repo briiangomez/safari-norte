@@ -1,0 +1,58 @@
+﻿@model IEnumerable<Safari.Entities.Medico>
+
+@{
+    ViewBag.Title = "Listado de Medicos";
+}
+
+<h2>Listado de Medicos</h2>
+
+<div>
+    @Html.ActionLink("Nueva", "Create", new { id = "new" }, htmlAttributes: new { @class = "btn btn-sm btn-info", @style = "margin: 8px; padding: 5px; padding-left: 15px; padding-right: 15px;" })
+</div>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.TipoMatricula)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NumeroMatricula)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Apellido)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Especialidad)
+        </th>
+        <th>
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.TipoMatricula)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NumeroMatricula)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Apellido)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Especialidad)
+        </td>
+        <td>
+            @Html.ActionLink("Ver detalles", "Details", new { id = item.Id }, htmlAttributes: new { @class = "btn btn-sm btn-info", @style = "margin-right: 10px;" })
+            @Html.ActionLink("Editar", "Edit", new { id = item.Id }, htmlAttributes: new { @class = "btn btn-sm btn-info", @style = "margin-right: 10px" })
+            @Html.ActionLink("Eliminar", "Delete", new { id = item.Id }, htmlAttributes: new { @class = "btn btn-sm btn-danger" })
+        </td>
+    </tr>
+}
+
+</table>

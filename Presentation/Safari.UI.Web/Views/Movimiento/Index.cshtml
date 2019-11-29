@@ -1,0 +1,66 @@
+﻿@model IEnumerable<Safari.Entities.Movimiento>
+
+@{
+    ViewBag.Title = "Listado de Movimientos";
+}
+
+<h2>Listado de Movimientos</h2>
+
+<p>
+    <a id="btnCreate" class="btn btn-sm btn-info" style="margin-top: 10px; margin-bottom: 10px;" data-fancybox data-type="iframe" data-src="@Url.Action("Create", "Movimiento")" href="javascript:;">Generar nuevo movimiento</a>
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Fecha)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ClienteId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TipoMovimientoId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Valor)
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Fecha)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ClienteId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TipoMovimientoId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Valor)
+        </td>
+    </tr>
+}
+
+</table>
+
+@section Scripts {
+    <script>
+        $("a#btnCreate").fancybox({
+            'afterClose': function () { window.location.reload(); },
+            iframe: { css: { width: '750px' } }
+        });
+        $("a#btnEdit").fancybox({
+            'afterClose': function () { window.location.reload(); },
+            iframe: { css: { width: '750px' } }
+        });
+        $("a#btnDetails").fancybox({
+            'afterClose': function () { window.location.reload(); },
+            iframe: { css: { width: '750px' } }
+        });
+        $("a#btnDelete").fancybox({
+            'afterClose': function () { window.location.reload(); },
+            iframe: { css: { width: '750px' } }
+        });
+    </script>
+}

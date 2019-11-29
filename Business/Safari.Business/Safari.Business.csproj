@@ -39,13 +39,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CitaComponent.cs" />
+    <Compile Include="GenericComponent.cs" />
+    <Compile Include="IComponent.cs" />
+    <Compile Include="MovimientoComponent.cs" />
+    <Compile Include="MedicoComponent.cs" />
+    <Compile Include="PrecioComponent.cs" />
+    <Compile Include="PacienteComponent.cs" />
     <Compile Include="ClienteComponent.cs" />
-    <Compile Include="EspecieComponent.cs" />
-    <Compile Include="MascotaComponent.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SalaComponent.cs" />
     <Compile Include="TipoMovimientoComponent.cs" />
     <Compile Include="TipoServicioComponent.cs" />
+    <Compile Include="EspecieComponent.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SalaComponent.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Data\Safari.Data\Safari.Data.csproj">

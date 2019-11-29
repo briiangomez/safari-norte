@@ -40,8 +40,49 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IService.cs" />
+    <Compile Include="ICitaService.cs" />
+    <Compile Include="IGenericService.cs" />
+    <Compile Include="IListResponse.cs" />
+    <Compile Include="IMovimientoService.cs" />
+    <Compile Include="IMedicoService.cs" />
+    <Compile Include="IPrecioService.cs" />
+    <Compile Include="IPacienteService.cs" />
+    <Compile Include="IClienteService.cs" />
+    <Compile Include="IRequest.cs" />
+    <Compile Include="IResponse.cs" />
+    <Compile Include="ITipoServicioService.cs" />
+    <Compile Include="ITipoMovimientoService.cs" />
+    <Compile Include="ISalaService.cs" />
+    <Compile Include="IEspecieService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Request\CitaRequest.cs" />
+    <Compile Include="Request\ClienteRequest.cs" />
+    <Compile Include="Request\EspecieRequest.cs" />
+    <Compile Include="Request\MedicoRequest.cs" />
+    <Compile Include="Request\MovimientoRequest.cs" />
+    <Compile Include="Request\PacienteRequest.cs" />
+    <Compile Include="Request\SalaRequest.cs" />
+    <Compile Include="Request\TipoMovimientoRequest.cs" />
+    <Compile Include="Request\TipoServicioRequest.cs" />
+    <Compile Include="Response\CitaResponse.cs" />
+    <Compile Include="Response\ClienteResponse.cs" />
+    <Compile Include="Response\EspecieResponse.cs" />
+    <Compile Include="Response\ListarCitaResponse.cs" />
+    <Compile Include="Response\ListarClienteResponse.cs" />
+    <Compile Include="Response\ListarMedicoResponse.cs" />
+    <Compile Include="Response\ListarPacienteResponse.cs" />
+    <Compile Include="Response\ListarSalaResponse.cs" />
+    <Compile Include="Response\ListarMovimientoResponse.cs" />
+    <Compile Include="Response\ListarTipoMovimientoResponse.cs" />
+    <Compile Include="Response\ListarTipoServicioResponse.cs" />
+    <Compile Include="Response\ListarTodosEspecieResponse.cs" />
+    <Compile Include="Response\ListarTodosMedicoResponse.cs" />
+    <Compile Include="Response\MedicoResponse.cs" />
+    <Compile Include="Response\MovimientoResponse.cs" />
+    <Compile Include="Response\PacienteResponse.cs" />
+    <Compile Include="Response\SalaResponse.cs" />
+    <Compile Include="Response\TipoMovimientoResponse.cs" />
+    <Compile Include="Response\TipoServicioResponse.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Shared\Safari.Entities\Safari.Entities.csproj">

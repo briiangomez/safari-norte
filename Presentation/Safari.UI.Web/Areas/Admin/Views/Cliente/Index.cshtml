@@ -1,0 +1,82 @@
+﻿@*@model IEnumerable<Safari.Entities.Cliente>*@
+
+@model PagedList.IPagedList<Safari.Entities.Cliente>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+
+@{
+    ViewBag.Title = "Listado de Clientes";
+}
+
+<h2>Listado de Clientes</h2>
+
+<div>
+    @Html.ActionLink("Nueva", "Create", new { id = "new" }, htmlAttributes: new { @class = "btn btn-sm btn-info", @style = "margin: 8px; padding: 5px; padding-left: 15px; padding-right: 15px;" })
+</div>
+
+@using (Html.BeginForm("Index", "Cliente", FormMethod.Get))
+{
+    <p style="margin: 8px;">
+        Buscar por Nombre: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+        <input type="submit" value="Buscar" class="btn btn-sm btn-info" style="margin: 8px; padding: 5px; padding-left: 15px; padding-right: 15px;"/>
+    </p>
+}
+
+<hr />
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.ActionLink("Apellido", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
+        </th>
+        <th>
+            @Html.Raw("Nombre")
+        </th>
+        <th>
+            @Html.Raw("Email")
+        </th>
+        <th>
+            @Html.Raw("Telefono")
+        </th>
+        <th>
+            @Html.ActionLink("FechaNacimiento", "Index", new { sortOrder = ViewBag.DateSortParm, currentFilter = ViewBag.CurrentFilter })
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Apellido)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Telefono)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaNacimiento)
+            </td>
+            <td>
+                @Html.ActionLink("Ver pacientes", "IndexPorCliente", "Paciente", new { cliente = item.Id }, htmlAttributes: new { @class = "btn btn-sm btn-info", @style = "margin-right: 10px;" })
+                @Html.ActionLink("Ver detalles", "Details", new { id = item.Id }, htmlAttributes: new { @class = "btn btn-sm btn-info", @style = "margin-right: 10px;" })
+                @Html.ActionLink("Editar", "Edit", new { id = item.Id }, htmlAttributes: new { @class = "btn btn-sm btn-info", @style = "margin-right: 10px" })
+                @Html.ActionLink("Eliminar", "Delete", new { id = item.Id }, htmlAttributes: new { @class = "btn btn-sm btn-danger" })
+            </td>
+        </tr>
+    }
+
+</table>
+
+<br />
+    Página @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de @Model.PageCount
+
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+
+

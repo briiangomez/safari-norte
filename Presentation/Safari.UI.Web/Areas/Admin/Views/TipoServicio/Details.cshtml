@@ -1,0 +1,27 @@
+﻿@model Safari.Entities.TipoServicio
+
+@{
+    ViewBag.Title = "Detalles";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutEmpty.cshtml";
+}
+
+<h2>Detalles</h2>
+
+<div>
+    <h4>Tipo de Servicio</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nombre)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    <a style="margin-right: 10px;" class="btn btn-sm btn-info" href="@Url.Action("Edit", new { id = Model.Id })">Editar</a>
+    <input type="button" value="Volver" class="btn btn-sm btn-info" onclick="parent.jQuery.fancybox.close()" />
+</p>

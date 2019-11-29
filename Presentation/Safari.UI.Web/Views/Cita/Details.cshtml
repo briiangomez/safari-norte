@@ -1,0 +1,123 @@
+﻿@model Safari.Entities.Cita
+
+@{
+    ViewBag.Title = "Detalles";
+    Layout = "~/Views/Shared/_LayoutEmpty.cshtml";
+}
+
+<h2>Detalles</h2>
+
+<div>
+    <h4>Cita</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Fecha)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fecha)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MedicoId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MedicoId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PacienteId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PacienteId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SalaId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SalaId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TipoServicioId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TipoServicioId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Estado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Estado)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedBy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ChangedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ChangedDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ChangedBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ChangedBy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DeletedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DeletedDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DeletedBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DeletedBy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Deleted)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Deleted)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    <a style="margin-right: 10px;" class="btn btn-sm btn-info" href="@Url.Action("Edit", "Cita", new { id = Model.Id })">Editar</a>
+    <input type="button" value="Volver" class="btn btn-sm btn-info" onclick="parent.jQuery.fancybox.close()" />
+</p>

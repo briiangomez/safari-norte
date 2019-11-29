@@ -1,45 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ServiceModel;
-using Safari.Business;
+﻿using Safari.Business;
 using Safari.Entities;
-using Safari.Services;
-using Safari.Services.Contracts;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.ServiceModel;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Safari.Services
 {
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerCall, ConcurrencyMode = ConcurrencyMode.Multiple)]
-    public class TipoMovimientoService : IServices<TipoMovimiento>
+    public class TipoMovimientoService : GenericService<TipoMovimiento>
     {
-        public void Actualizar(TipoMovimiento entity)
+        public TipoMovimientoService(IComponent<TipoMovimiento> component) : base (component)
         {
-            var bc = new TipoMovimientoComponent();
-            bc.Actualizar(entity);
-        }
 
-        public TipoMovimiento Agregar(TipoMovimiento TipoMovimiento)
-        {
-            var bc = new TipoMovimientoComponent();
-            return bc.Agregar(TipoMovimiento);
-        }
-
-        public void Eliminar(int id)
-        {
-            var bc = new TipoMovimientoComponent();
-            bc.Eliminar(id);
-        }
-
-        public TipoMovimiento Listar(int id)
-        {
-            var bc = new TipoMovimientoComponent();
-            return bc.Listar(id);
-        }
-
-        public List<TipoMovimiento> ListarTodos()
-        {
-            var bc = new TipoMovimientoComponent();
-            return bc.ListarTodos();
         }
     }
 }

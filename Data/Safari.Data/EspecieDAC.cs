@@ -14,15 +14,21 @@ namespace Safari.Data
     {
         public Especie Create(Especie especie)
         {
-            const string SQL_STATEMENT = "INSERT INTO Especie ([Nombre]) VALUES(@Nombre); SELECT SCOPE_IDENTITY();";
-
-            var db = DatabaseFactory.CreateDatabase(CONNECTION_NAME);
-            using (DbCommand cmd = db.GetSqlStringCommand(SQL_STATEMENT))
+            if (ReadBy(especie.Nombre) == null)
             {
-                db.AddInParameter(cmd, "@Nombre", DbType.AnsiString, especie.Nombre);
-                especie.Id = Convert.ToInt32(db.ExecuteScalar(cmd));
+                const string SQL_STATEMENT = "INSERT INTO Especie ([Nombre]) VALUES(@Nombre); SELECT SCOPE_IDENTITY();";
+
+                var db = DatabaseFactory.CreateDatabase(CONNECTION_NAME);
+                using (DbCommand cmd = db.GetSqlStringCommand(SQL_STATEMENT))
+                {
+                    db.AddInParameter(cmd, "@Nombre", DbType.AnsiString, especie.Nombre);
+                    especie.Id = Convert.ToInt32(db.ExecuteScalar(cmd));
+                }
+                return especie;
+            } else
+            {
+                throw new Exception("El registro ya existe");
             }
-            return especie;
         }
 		
         public List<Especie> Read()
@@ -64,7 +70,27 @@ namespace Safari.Data
             }
             return especie;
         }
-		
+
+        public Especie ReadBy(String nombre)
+        {
+            const string SQL_STATEMENT = "SELECT [Id], [Nombre] FROM Especie WHERE [Nombre]=@Nombre ";
+            Especie especie = null;
+
+            var db = DatabaseFactory.CreateDatabase(CONNECTION_NAME);
+            using (DbCommand cmd = db.GetSqlStringCommand(SQL_STATEMENT))
+            {
+                db.AddInParameter(cmd, "@Nombre", DbType.AnsiString, nombre);
+                using (IDataReader dr = db.ExecuteReader(cmd))
+                {
+                    if (dr.Read())
+                    {
+                        especie = LoadEspecie(dr);
+                    }
+                }
+            }
+            return especie;
+        }
+
         public void Update(Especie especie)
         {
             const string SQL_STATEMENT = "UPDATE Especie SET [Nombre]= @Nombre WHERE [Id]= @Id ";

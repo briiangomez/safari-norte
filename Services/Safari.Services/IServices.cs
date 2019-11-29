@@ -23,7 +23,8 @@ namespace Safari.Services.Contracts
         void Actualizar(TService entity);
         [OperationContract]
         void Eliminar(int id);
-
+        [OperationContract]
+        List<TService> ListarNombre(string nombre);
 
     }
 }

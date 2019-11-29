@@ -6,6 +6,11 @@ using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
 using Safari.UI.Web.Models;
+using Safari.IoC.App_Start;
+using WebActivatorEx;
+
+[assembly: PreApplicationStartMethod(typeof(StructuremapMvc), "Start")]
+[assembly: ApplicationShutdownMethod(typeof(StructuremapMvc), "End")]
 
 namespace Safari.UI.Web
 {
@@ -63,6 +68,7 @@ namespace Safari.UI.Web
             //    ClientId = "",
             //    ClientSecret = ""
             //});
+
         }
     }
 }

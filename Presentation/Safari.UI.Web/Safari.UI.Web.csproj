@@ -53,6 +53,14 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -106,6 +114,10 @@
     </Reference>
     <Reference Include="System.Web.Optimization">
       <HintPath>..\..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="WebActivatorEx, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\WebActivatorEx.2.2.0\lib\net40\WebActivatorEx.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="WebGrease">
       <Private>True</Private>
@@ -174,55 +186,92 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\DashboardController.cs" />
+    <Compile Include="Areas\Admin\Controllers\EspecieAPIController.cs" />
+    <Compile Include="Areas\Admin\Controllers\LogController.cs" />
+    <Compile Include="Areas\Admin\Models\ListLogViewModel.cs" />
     <Compile Include="Constants\Application.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\ClienteController.cs" />
-    <Compile Include="Controllers\EspecieController.cs" />
+    <Compile Include="Controllers\MovimientoController.cs" />
+    <Compile Include="Areas\Admin\Controllers\MedicoController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ClienteController.cs" />
+    <Compile Include="Areas\Admin\Controllers\EspecieController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\MascotaController.cs" />
-    <Compile Include="Controllers\SalaController.cs" />
-    <Compile Include="Controllers\TipoMovimientoController.cs" />
-    <Compile Include="Controllers\TipoServicioController.cs" />
+    <Compile Include="Controllers\CitaController.cs" />
+    <Compile Include="Areas\Admin\Controllers\PacienteController.cs" />
+    <Compile Include="Areas\Admin\Controllers\SalaController.cs" />
+    <Compile Include="Areas\Admin\Controllers\TipoMovimientoController.cs" />
+    <Compile Include="Areas\Admin\Controllers\TipoServicioController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201908310052181_InitialCreate.cs" />
-    <Compile Include="Migrations\201908310052181_InitialCreate.Designer.cs">
-      <DependentUpon>201908310052181_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201908310136317_Init.cs" />
-    <Compile Include="Migrations\201908310136317_Init.Designer.cs">
-      <DependentUpon>201908310136317_Init.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\GenericMessageViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\PacienteListViewModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\Admin\Content\bootstrap-cosmo.css" />
-    <Content Include="Areas\Admin\Content\bootstrap.css" />
-    <Content Include="Content\bootstrap-cyborg.css" />
+    <Content Include="App_Data\LogFile.txt" />
+    <Content Include="Content\bootstrap-dark.css" />
+    <Content Include="Content\bootstrap-flatly.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\images\logo.png" />
+    <Content Include="Content\images\logo_sm.png" />
+    <Content Include="Content\jquery.fancybox.css" />
+    <Content Include="Content\PagedList.css" />
+    <Content Include="Content\themes\base\accordion.css" />
+    <Content Include="Content\themes\base\all.css" />
+    <Content Include="Content\themes\base\autocomplete.css" />
+    <Content Include="Content\themes\base\base.css" />
+    <Content Include="Content\themes\base\button.css" />
+    <Content Include="Content\themes\base\core.css" />
+    <Content Include="Content\themes\base\datepicker.css" />
+    <Content Include="Content\themes\base\dialog.css" />
+    <Content Include="Content\themes\base\draggable.css" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\themes\base\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_444444_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_555555_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_777620_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_777777_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_cc0000_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Content\themes\base\jquery-ui.css" />
+    <Content Include="Content\themes\base\jquery-ui.min.css" />
+    <Content Include="Content\themes\base\menu.css" />
+    <Content Include="Content\themes\base\progressbar.css" />
+    <Content Include="Content\themes\base\resizable.css" />
+    <Content Include="Content\themes\base\selectable.css" />
+    <Content Include="Content\themes\base\selectmenu.css" />
+    <Content Include="Content\themes\base\slider.css" />
+    <Content Include="Content\themes\base\sortable.css" />
+    <Content Include="Content\themes\base\spinner.css" />
+    <Content Include="Content\themes\base\tabs.css" />
+    <Content Include="Content\themes\base\theme.css" />
+    <Content Include="Content\themes\base\tooltip.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Images\banner1.png" />
-    <Content Include="Images\banner2.png" />
-    <Content Include="Images\banner3.png" />
-    <Content Include="Images\facebook.png" />
-    <Content Include="Images\instagram.png" />
-    <Content Include="Images\publicidad1.png" />
-    <Content Include="Images\publicidad2.png" />
-    <Content Include="Images\twitter.png" />
-    <Content Include="Images\youtube.png" />
+    <Content Include="robots.txt" />
+    <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -237,12 +286,24 @@
     <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Admin\Views\Dashboard\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_MenuPartial.cshtml" />
+    <Content Include="Areas\Admin\Views\EspecieAPI\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\EspecieAPI\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Log\Index.cshtml" />
+    <None Include="Properties\PublishProfiles\pablo.pubxml" />
+    <None Include="Properties\PublishProfiles\safari.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <None Include="Scripts\jquery-2.2.4.intellisense.js" />
+    <Content Include="Scripts\datepicker\datepicker-esAR.js" />
     <Content Include="Scripts\jquery-2.2.4.js" />
     <Content Include="Scripts\jquery-2.2.4.min.js" />
     <Content Include="Scripts\jquery-2.2.4.min.map" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery-ui-1.12.1.js" />
+    <Content Include="Scripts\jquery-ui-1.12.1.min.js" />
+    <Content Include="Scripts\jquery.fancybox.js" />
+    <Content Include="Scripts\jquery.slim.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -251,7 +312,10 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="sitemap.xml" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -284,64 +348,83 @@
     <Content Include="Views\Manage\SetPassword.cshtml" />
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
-    <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_MenuPartial.cshtml" />
-    <Content Include="Views\Especie\Index.cshtml" />
-    <Content Include="Views\Especie\Details.cshtml" />
-    <Content Include="Views\Especie\Create.cshtml" />
-    <Content Include="Views\Especie\Edit.cshtml" />
-    <Content Include="Views\Especie\Delete.cshtml" />
-    <Content Include="Views\Cliente\Create.cshtml" />
-    <Content Include="Views\Cliente\Delete.cshtml" />
-    <Content Include="Views\Cliente\Details.cshtml" />
-    <Content Include="Views\Cliente\Edit.cshtml" />
-    <Content Include="Views\Cliente\Index.cshtml" />
-    <Content Include="Views\Mascota\Create.cshtml" />
-    <Content Include="Views\Mascota\Delete.cshtml" />
-    <Content Include="Views\Mascota\Details.cshtml" />
-    <Content Include="Views\Mascota\Edit.cshtml" />
-    <Content Include="Views\Mascota\Index.cshtml" />
-    <Content Include="Views\Sala\Create.cshtml" />
-    <Content Include="Views\Sala\Delete.cshtml" />
-    <Content Include="Views\Sala\Details.cshtml" />
-    <Content Include="Views\Sala\Edit.cshtml" />
-    <Content Include="Views\Sala\Index.cshtml" />
-    <Content Include="Views\TipoMovimiento\Create.cshtml" />
-    <Content Include="Views\TipoMovimiento\Delete.cshtml" />
-    <Content Include="Views\TipoMovimiento\Details.cshtml" />
-    <Content Include="Views\TipoMovimiento\Edit.cshtml" />
-    <Content Include="Views\TipoMovimiento\Index.cshtml" />
-    <Content Include="Views\TipoServicio\Create.cshtml" />
-    <Content Include="Views\TipoServicio\Delete.cshtml" />
-    <Content Include="Views\TipoServicio\Details.cshtml" />
-    <Content Include="Views\TipoServicio\Edit.cshtml" />
-    <Content Include="Views\TipoServicio\Index.cshtml" />
+    <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Areas\Admin\Views\Especie\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Especie\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Especie\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Especie\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Especie\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Sala\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Sala\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Sala\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Sala\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Sala\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\TipoServicio\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\TipoServicio\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\TipoServicio\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\TipoServicio\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\TipoServicio\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\TipoMovimiento\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\TipoMovimiento\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\TipoMovimiento\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\TipoMovimiento\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\TipoMovimiento\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Cliente\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Cliente\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Cliente\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Cliente\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Cliente\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Paciente\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Paciente\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Paciente\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Paciente\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Paciente\Edit.cshtml" />
+    <Content Include="Views\Shared\_MenuAdminPartial.cshtml" />
+    <Content Include="Areas\Admin\Views\Paciente\IndexPorCliente.cshtml" />
+    <Content Include="Areas\Admin\Views\Paciente\List.cshtml" />
+    <Content Include="Views\Shared\_LayoutEmpty.cshtml" />
+    <Content Include="Areas\Admin\Views\Medico\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Medico\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Medico\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Medico\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Medico\Index.cshtml" />
+    <Content Include="Views\Cita\Create.cshtml" />
+    <Content Include="Views\Cita\Edit.cshtml" />
+    <Content Include="Views\Cita\Index.cshtml" />
+    <Content Include="Views\Cita\Delete.cshtml" />
+    <Content Include="Views\Cita\Details.cshtml" />
+    <Content Include="Views\Movimiento\Create.cshtml" />
+    <Content Include="Views\Movimiento\Details.cshtml" />
+    <Content Include="Views\Movimiento\Index.cshtml" />
+    <Content Include="Views\Shared\_GenericMessage.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_LayoutEmpty.cshtml" />
+    <None Include="Views\Shared\_LayoutLanding.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
-    <Folder Include="Areas\Admin\Models\" />
+    <Folder Include="Areas\Admin\Views\Precio\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Safari.IoC\Safari.IoC.csproj">
+      <Project>{4df520b2-6e34-4bd1-abee-23c5ad2835c6}</Project>
+      <Name>Safari.IoC</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Shared\Safari.Entities\Safari.Entities.csproj">
       <Project>{DED5F661-C299-47EB-AE50-B64BE8FEEBC9}</Project>
       <Name>Safari.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Shared\Safari.Framework\Safari.Framework.csproj">
+      <Project>{CE444DAE-9CBC-4F1D-9049-09489620BF63}</Project>
+      <Name>Safari.Framework</Name>
     </ProjectReference>
     <ProjectReference Include="..\Safari.UI.Process\Safari.UI.Process.csproj">
       <Project>{7B34EC89-2823-4817-ADAD-942A08C1AC24}</Project>
       <Name>Safari.UI.Process</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201908310052181_InitialCreate.resx">
-      <DependentUpon>201908310052181_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201908310136317_Init.resx">
-      <DependentUpon>201908310136317_Init.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -361,7 +444,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>55223</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:55225/</IISUrl>
+          <IISUrl>http://localhost:55223/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

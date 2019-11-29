@@ -15,6 +15,7 @@ namespace Safari.Data
             DatabaseFactory.SetDatabaseProviderFactory(new DatabaseProviderFactory(), false);
         }
 
+
         protected int PageSize
         {
             get

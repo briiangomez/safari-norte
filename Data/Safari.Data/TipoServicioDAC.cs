@@ -1,48 +1,33 @@
-﻿using Microsoft.Practices.EnterpriseLibrary.Data;
-using Safari.Entities;
 using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.Common;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Data;
+using System.Data.Common;
+using Microsoft.Practices.EnterpriseLibrary.Data;
+using Safari.Entities;
 
 namespace Safari.Data
 {
-    public class TipoServicioDAC : DataAccessComponent, IRepository<TipoServicio>
+    public partial class TipoServicioDAC : DataAccessComponent, IRepository<TipoServicio>
     {
-        public TipoServicio Create(TipoServicio entity)
+        public TipoServicio Create(TipoServicio TipoServicio)
         {
-            const string SQL_STATEMENT = @"INSERT INTO dbo.TipoServicio (Nombre)
-                                            SELECT @Nombre; SELECT SCOPE_IDENTITY();";
+            const string SQL_STATEMENT = "INSERT INTO TipoServicio ([Nombre]) VALUES(@Nombre); SELECT SCOPE_IDENTITY();";
 
             var db = DatabaseFactory.CreateDatabase(CONNECTION_NAME);
             using (DbCommand cmd = db.GetSqlStringCommand(SQL_STATEMENT))
             {
-                db.AddInParameter(cmd, "@Nombre", DbType.AnsiString, entity.Nombre);
-                entity.Id = Convert.ToInt32(db.ExecuteScalar(cmd));
+                db.AddInParameter(cmd, "@Nombre", DbType.AnsiString, TipoServicio.Nombre);
+                TipoServicio.Id = Convert.ToInt32(db.ExecuteScalar(cmd));
             }
-            return entity;
+            return TipoServicio;
         }
-
-        public void Delete(int id)
-        {
-            const string SQL_STATEMENT = @"DELETE
-                                            FROM   dbo.TipoServicio
-                                            WHERE  Id = @Id";
-            var db = DatabaseFactory.CreateDatabase(CONNECTION_NAME);
-            using (DbCommand cmd = db.GetSqlStringCommand(SQL_STATEMENT))
-            {
-                db.AddInParameter(cmd, "@Id", DbType.Int32, id);
-                db.ExecuteNonQuery(cmd);
-            }
-        }
-
+		
         public List<TipoServicio> Read()
         {
-            const string SQL_STATEMENT = @"SELECT Id, Nombre 
-                                             FROM dbo.TipoServicio";
+            const string SQL_STATEMENT = "SELECT [Id], [Nombre] FROM TipoServicio ";
 
             List<TipoServicio> result = new List<TipoServicio>();
             var db = DatabaseFactory.CreateDatabase(CONNECTION_NAME);
@@ -52,20 +37,18 @@ namespace Safari.Data
                 {
                     while (dr.Read())
                     {
-                        TipoServicio especie = LoadTipoServicio(dr);
-                        result.Add(especie);
+                        TipoServicio TipoServicio = LoadTipoServicio(dr);
+                        result.Add(TipoServicio);
                     }
                 }
             }
             return result;
         }
-
+		
         public TipoServicio ReadBy(int id)
         {
-            const string SQL_STATEMENT = @"SELECT Id, Nombre 
-                                                FROM   dbo.TipoServicio
-                                                WHERE  Id = @Id  ";
-            TipoServicio especie = null;
+            const string SQL_STATEMENT = "SELECT [Id], [Nombre] FROM TipoServicio WHERE [Id]=@Id ";
+            TipoServicio TipoServicio = null;
 
             var db = DatabaseFactory.CreateDatabase(CONNECTION_NAME);
             using (DbCommand cmd = db.GetSqlStringCommand(SQL_STATEMENT))
@@ -75,35 +58,44 @@ namespace Safari.Data
                 {
                     if (dr.Read())
                     {
-                        especie = LoadTipoServicio(dr);
+                        TipoServicio = LoadTipoServicio(dr);
                     }
                 }
             }
-            return especie;
+            return TipoServicio;
         }
-
-        public void Update(TipoServicio entity)
+		
+        public void Update(TipoServicio TipoServicio)
         {
-            const string SQL_STATEMENT = @"UPDATE dbo.TipoServicio
-                                            SET    Nombre = @Nombre
-                                                WHERE Id = @Id";
+            const string SQL_STATEMENT = "UPDATE TipoServicio SET [Nombre]= @Nombre WHERE [Id]= @Id ";
 
             var db = DatabaseFactory.CreateDatabase(CONNECTION_NAME);
             using (DbCommand cmd = db.GetSqlStringCommand(SQL_STATEMENT))
             {
-                db.AddInParameter(cmd, "@Nombre", DbType.AnsiString, entity.Nombre);
-                db.AddInParameter(cmd, "@Id", DbType.Int32, entity.Id);
+                db.AddInParameter(cmd, "@Nombre", DbType.AnsiString, TipoServicio.Nombre);
+                db.AddInParameter(cmd, "@Id", DbType.Int32, TipoServicio.Id);
                 db.ExecuteNonQuery(cmd);
             }
         }
-
+		
+        public void Delete(int id)
+        {
+            const string SQL_STATEMENT = "DELETE TipoServicio WHERE [Id]= @Id ";
+            var db = DatabaseFactory.CreateDatabase(CONNECTION_NAME);
+            using (DbCommand cmd = db.GetSqlStringCommand(SQL_STATEMENT))
+            {
+                db.AddInParameter(cmd, "@Id", DbType.Int32, id);
+                db.ExecuteNonQuery(cmd);
+            }
+        }
+		
         private TipoServicio LoadTipoServicio(IDataReader dr)
         {
-            TipoServicio entidad = new TipoServicio();
-            entidad.Id = GetDataValue<int>(dr, "Id");
-            entidad.Nombre = GetDataValue<string>(dr, "Nombre");
-            return entidad;
+            TipoServicio TipoServicio = new TipoServicio();
+            TipoServicio.Id = GetDataValue<int>(dr, "Id");
+            TipoServicio.Nombre = GetDataValue<string>(dr, "Nombre");
+            return TipoServicio;
         }
     }
-
 }
+

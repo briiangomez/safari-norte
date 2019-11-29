@@ -20,12 +20,23 @@ namespace Safari.UI.Web
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/bootstrap.js",
+                "~/Scripts/bootstrap.js",
                       "~/Scripts/respond.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap-cyborg.css",
+                "~/Content/bootstrap-dark.css",
+                    "~/Content/site.css"));
+
+            bundles.Add(new StyleBundle("~/Content/admin-css").Include(
+                "~/Content/bootstrap-flatly.css",
                       "~/Content/site.css"));
+
+            bundles.Add(new ScriptBundle("~/bundles/fancybox").Include(
+                       "~/Scripts/jquery.fancybox.js"));
+
+            bundles.Add(new StyleBundle("~/Content/fancybox").Include(
+                "~/Content/jquery.fancybox.css"));
+
         }
     }
 }

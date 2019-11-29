@@ -1,0 +1,21 @@
+﻿@model Safari.Entities.Cita
+
+@{
+    ViewBag.Title = "Eliminar";
+    Layout = "~/Views/Shared/_LayoutEmpty.cshtml";
+}
+
+<h2>Eliminar</h2>
+<h3>¿Está seguro que desea eliminar la cita para el "@Html.DisplayFor(model => model.Fecha)"?</h3>
+<br />
+<div>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input style="margin-right: 10px" type="submit" value="Eliminar" class="btn btn-sm btn-danger" onclick="parent.jQuery.fancybox.close()" />
+            <input type="button" value="Volver" class="btn btn-sm btn-info" onclick="parent.jQuery.fancybox.close()" />
+        </div>
+    }
+</div>

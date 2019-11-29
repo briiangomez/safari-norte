@@ -8,34 +8,16 @@ using System.Threading.Tasks;
 
 namespace Safari.Business
 {
-    public partial class TipoMovimientoComponent
+    public class TipoMovimientoComponent : GenericComponent<TipoMovimiento>
     {
-        public TipoMovimiento Agregar(TipoMovimiento tipo)
+        public TipoMovimientoComponent(IRepository<TipoMovimiento> repository) : base(repository)
         {
-            TipoMovimiento result = default(TipoMovimiento);
-            var dac = new TipoMovimientoDAC();
-            result = dac.Create(tipo);
-            return result;
-        }
-
-        public void Eliminar(int id) => new TipoMovimientoDAC().Delete(id);
-
-        public void Actualizar(TipoMovimiento tipo) => new TipoMovimientoDAC().Update(tipo);
-
-        public TipoMovimiento Listar(int id)
-        {
-            return new TipoMovimientoDAC().ReadBy(id);
-        }
-
-        public List<TipoMovimiento> ListarTodos()
-        {
-            List<TipoMovimiento> result = default(List<TipoMovimiento>);
-
-            var tipoDAC = new TipoMovimientoDAC();
-            result = tipoDAC.Read();
-            return result;
 
         }
 
+        public TipoMovimientoComponent()
+        {
+            this.repository = new TipoMovimientoDAC();
+        }
     }
 }

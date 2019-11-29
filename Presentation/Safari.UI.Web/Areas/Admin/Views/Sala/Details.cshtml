@@ -1,0 +1,35 @@
+﻿@model Safari.Entities.Sala
+
+@{
+    ViewBag.Title = "Detalles";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutEmpty.cshtml";
+}
+
+<h2>Detalles</h2>
+
+<div>
+    <h4>Sala</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TipoSala)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TipoSala)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    <a style="margin-right: 10px;" class="btn btn-sm btn-info" href="@Url.Action("Edit", "Sala", new { id = Model.Id })">Editar</a>
+    <input type="button" value="Volver" class="btn btn-sm btn-info" onclick="parent.jQuery.fancybox.close()" />
+</p>

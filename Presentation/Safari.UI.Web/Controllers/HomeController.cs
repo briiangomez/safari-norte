@@ -8,22 +8,21 @@ namespace Safari.UI.Web.Controllers
 {
     public class HomeController : Controller
     {
+        [Route("", Name = "HomeControllerRouteIndex")]
         public ActionResult Index()
         {
             return View();
         }
-
+        [Route("acerca-de-nosotros", Name = "HomeControllerRouteAbout")]
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
-
+            ViewBag.Messagee = "Descripción";
             return View();
         }
-
+        [Route("contacto", Name = "HomeControllerRouteContact")]
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
-
+            ViewBag.Messagee = "Datos de contacto";
             return View();
         }
     }

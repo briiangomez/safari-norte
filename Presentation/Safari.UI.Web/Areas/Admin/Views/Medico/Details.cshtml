@@ -1,0 +1,82 @@
+﻿@model Safari.Entities.Medico
+
+@{
+    ViewBag.Title = "Detalles";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Detalles</h2>
+
+<div>
+    <h4>Medico</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TipoMatricula)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TipoMatricula)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.NumeroMatricula)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NumeroMatricula)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Apellido)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Apellido)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Telefono)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Telefono)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Especialidad)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Especialidad)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaNacimiento)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaNacimiento)
+        </dd>
+
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.Id }, new { @class = "btn btn-sm btn-info", @style = "margin-right: 10px" })
+    @Html.ActionLink("Volver al listado", "Index", new { id = Model.Id }, new { @class = "btn btn-sm btn-info", @style = "margin-right: 10px" })
+</p>

@@ -17,6 +17,7 @@ namespace Safari.Entities
 
 
         [DisplayName("Nombre")]
+        [StringLength(50, MinimumLength = 2, ErrorMessage = "Debe tener entre 2 y 50 caracteres")]
         [Required]
         public string Nombre { get; set; }
 

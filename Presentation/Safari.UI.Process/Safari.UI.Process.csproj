@@ -61,28 +61,53 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ClienteProcess.cs" />
-    <Compile Include="EspecieProcess.cs" />
-    <Compile Include="MascotaProcess.cs" />
+    <Compile Include="APIProcess\CitaAPIProcess.cs" />
+    <Compile Include="APIProcess\ClienteAPIProcess.cs" />
+    <Compile Include="APIProcess\EspecieAPIProcess.cs" />
+    <Compile Include="APIProcess\GenericAPIProcess.cs" />
+    <Compile Include="APIProcess\IApiProcess.cs" />
+    <Compile Include="APIProcess\MedicoAPIProcess.cs" />
+    <Compile Include="APIProcess\MovimientoAPIProcess.cs" />
+    <Compile Include="APIProcess\PacienteAPIProcess.cs" />
+    <Compile Include="APIProcess\SalaAPIProcess.cs" />
+    <Compile Include="APIProcess\TipoMovimientoAPIProcess.cs" />
+    <Compile Include="APIProcess\TipoServicioAPIProcess.cs" />
+    <Compile Include="Process\CitaProcess.cs" />
+    <Compile Include="IProcess.cs" />
+    <Compile Include="Process\MovimientoProcess.cs" />
+    <Compile Include="Process\MedicoProcess.cs" />
+    <Compile Include="Process\PrecioProcess.cs" />
+    <Compile Include="Process\PacienteProcess.cs" />
+    <Compile Include="Process\ClienteProcess.cs" />
+    <Compile Include="Process\EspecieProcess.cs" />
+    <Compile Include="Process\GenericProcess.cs" />
+    <Compile Include="Process\SalaProcess.cs" />
+    <Compile Include="Process\TipoMovimientoProcess.cs" />
+    <Compile Include="Process\TipoServicioProcess.cs" />
     <Compile Include="MediaType.cs" />
     <Compile Include="ProcessComponent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SalaProcess.cs" />
-    <Compile Include="TipoMovimientoProcess.cs" />
-    <Compile Include="TipoServicioProcess.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Business\Safari.Business\Safari.Business.csproj">
+      <Project>{7ad85e7b-e229-4f10-8837-6c5bfe05fc52}</Project>
+      <Name>Safari.Business</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Services\Safari.Services.Contracts\Safari.Services.Contracts.csproj">
-      <Project>{AED38724-3F4A-4128-8843-E65D4D821B41}</Project>
+      <Project>{aed38724-3f4a-4128-8843-e65d4d821b41}</Project>
       <Name>Safari.Services.Contracts</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Services\Safari.Services\Safari.Services.csproj">
-      <Project>{C1742601-B74E-492E-9465-C4465D9AE02D}</Project>
+      <Project>{c1742601-b74e-492e-9465-c4465d9ae02d}</Project>
       <Name>Safari.Services</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Shared\Safari.Entities\Safari.Entities.csproj">
       <Project>{DED5F661-C299-47EB-AE50-B64BE8FEEBC9}</Project>
       <Name>Safari.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Shared\Safari.Framework\Safari.Framework.csproj">
+      <Project>{ce444dae-9cbc-4f1d-9049-09489620bf63}</Project>
+      <Name>Safari.Framework</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -29,6 +29,5 @@ namespace Safari.UI.Web.Models
         {
             return new ApplicationDbContext();
         }
-        
     }
 }

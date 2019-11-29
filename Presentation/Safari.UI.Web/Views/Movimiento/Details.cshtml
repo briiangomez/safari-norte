@@ -1,0 +1,50 @@
+﻿@model Safari.Entities.Movimiento
+
+@{
+    ViewBag.Title = "Detalles";
+    Layout = "~/Views/Shared/_LayoutEmpty.cshtml";
+}
+
+<h2>Detalles</h2>
+
+<div>
+    <h4>Movimiento</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Fecha)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fecha)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ClienteId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ClienteId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TipoMovimientoId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TipoMovimientoId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Valor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Valor)
+        </dd>
+    </dl>
+</div>
+<p>
+    <a style="margin-right: 10px;" class="btn btn-sm btn-info" href="@Url.Action("Edit", "Movimiento", new { id = Model.Id })">Editar</a>
+    <input type="button" value="Volver" class="btn btn-sm btn-info" onclick="parent.jQuery.fancybox.close()" />
+</p>

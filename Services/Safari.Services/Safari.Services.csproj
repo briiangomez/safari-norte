@@ -40,14 +40,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CitaService.cs" />
+    <Compile Include="GenericService.cs" />
+    <Compile Include="MovimientoService.cs" />
+    <Compile Include="MedicoService.cs" />
+    <Compile Include="PrecioService.cs" />
+    <Compile Include="PacienteService.cs" />
     <Compile Include="ClienteService.cs" />
-    <Compile Include="EspecieService.cs" />
-    <Compile Include="IServices.cs" />
-    <Compile Include="MascotaService.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SalaService.cs" />
     <Compile Include="TipoMovimientoService.cs" />
     <Compile Include="TipoServicioService.cs" />
+    <Compile Include="SalaService.cs" />
+    <Compile Include="EspecieService.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Business\Safari.Business\Safari.Business.csproj">

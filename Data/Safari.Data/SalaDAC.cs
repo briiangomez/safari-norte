@@ -1,49 +1,34 @@
-﻿using Microsoft.Practices.EnterpriseLibrary.Data;
-using Safari.Entities;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.Common;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Data;
+using System.Data.Common;
+using Microsoft.Practices.EnterpriseLibrary.Data;
+using Safari.Entities;
 
 namespace Safari.Data
 {
-    public class SalaDAC : DataAccessComponent, IRepository<Sala>
+    public partial class SalaDAC : DataAccessComponent, IRepository<Sala>
     {
-        public Sala Create(Sala entity)
+        public Sala Create(Sala Sala)
         {
-            const string SQL_STATEMENT = @"INSERT INTO dbo.Sala (Nombre, TipoSala)
-                                    SELECT @Nombre, @TipoSala; SELECT SCOPE_IDENTITY();";
+            const string SQL_STATEMENT = "INSERT INTO Sala ([Nombre], [TipoSala]) VALUES(@Nombre, @TipoSala); SELECT SCOPE_IDENTITY();";
 
             var db = DatabaseFactory.CreateDatabase(CONNECTION_NAME);
             using (DbCommand cmd = db.GetSqlStringCommand(SQL_STATEMENT))
             {
-                db.AddInParameter(cmd, "@Nombre", DbType.AnsiString, entity.Nombre);
-                db.AddInParameter(cmd, "@TipoSala", DbType.Int16, entity.TipoSala);
-                entity.Id = Convert.ToInt32(db.ExecuteScalar(cmd));
+                db.AddInParameter(cmd, "@Nombre", DbType.AnsiString, Sala.Nombre);
+                db.AddInParameter(cmd, "@TipoSala", DbType.AnsiString, Sala.TipoSala);
+                Sala.Id = Convert.ToInt32(db.ExecuteScalar(cmd));
             }
-            return entity;
-        }
-
-        public void Delete(int id)
-        {
-            const string SQL_STATEMENT = @"DELETE
-                                            FROM   dbo.Sala
-                                            WHERE  Id = @Id";
-            var db = DatabaseFactory.CreateDatabase(CONNECTION_NAME);
-            using (DbCommand cmd = db.GetSqlStringCommand(SQL_STATEMENT))
-            {
-                db.AddInParameter(cmd, "@Id", DbType.Int32, id);
-                db.ExecuteNonQuery(cmd);
-            }
+            return Sala;
         }
 
         public List<Sala> Read()
         {
-            const string SQL_STATEMENT = @"SELECT Id, Nombre, Multiplicador 
-                                            FROM   dbo.TipoMovimiento";
+            const string SQL_STATEMENT = "SELECT [Id], [Nombre], [TipoSala] FROM Sala ";
 
             List<Sala> result = new List<Sala>();
             var db = DatabaseFactory.CreateDatabase(CONNECTION_NAME);
@@ -53,8 +38,8 @@ namespace Safari.Data
                 {
                     while (dr.Read())
                     {
-                        Sala entidad = LoadEntity(dr);
-                        result.Add(entidad);
+                        Sala Sala = LoadSala(dr);
+                        result.Add(Sala);
                     }
                 }
             }
@@ -63,10 +48,8 @@ namespace Safari.Data
 
         public Sala ReadBy(int id)
         {
-            const string SQL_STATEMENT = @"SELECT Id, Nombre, TipoSala 
-                                            FROM   dbo.Sala
-                                            WHERE  Id = @Id";
-            Sala entidad = null;
+            const string SQL_STATEMENT = "SELECT [Id], [Nombre], [TipoSala] FROM Sala WHERE [Id]=@Id ";
+            Sala Sala = null;
 
             var db = DatabaseFactory.CreateDatabase(CONNECTION_NAME);
             using (DbCommand cmd = db.GetSqlStringCommand(SQL_STATEMENT))
@@ -76,38 +59,46 @@ namespace Safari.Data
                 {
                     if (dr.Read())
                     {
-                        entidad = LoadEntity(dr);
+                        Sala = LoadSala(dr);
                     }
                 }
             }
-            return entidad;
+            return Sala;
         }
 
-        public void Update(Sala entity)
+        public void Update(Sala Sala)
         {
-            const string SQL_STATEMENT = @"UPDATE dbo.Sala
-                                                SET    Nombre = @Nombre, TipoSala = @TipoSala
-                                                WHERE  Id = @Id";
+            const string SQL_STATEMENT = "UPDATE Sala SET [Nombre]= @Nombre, [TipoSala]=@TipoSala WHERE [Id]= @Id ";
 
             var db = DatabaseFactory.CreateDatabase(CONNECTION_NAME);
             using (DbCommand cmd = db.GetSqlStringCommand(SQL_STATEMENT))
             {
-                db.AddInParameter(cmd, "@Nombre", DbType.AnsiString, entity.Nombre);
-                db.AddInParameter(cmd, "@TipoSala", DbType.String, entity.TipoSala);
-                db.AddInParameter(cmd, "@Id", DbType.Int32, entity.Id);
+                db.AddInParameter(cmd, "@Nombre", DbType.AnsiString, Sala.Nombre);
+                db.AddInParameter(cmd, "@TipoSala", DbType.AnsiString, Sala.TipoSala);
+                db.AddInParameter(cmd, "@Id", DbType.Int32, Sala.Id);
                 db.ExecuteNonQuery(cmd);
             }
         }
 
-        private Sala LoadEntity(IDataReader dr)
+        public void Delete(int id)
         {
-            Sala entidad = new Sala
+            const string SQL_STATEMENT = "DELETE Sala WHERE [Id]= @Id ";
+            var db = DatabaseFactory.CreateDatabase(CONNECTION_NAME);
+            using (DbCommand cmd = db.GetSqlStringCommand(SQL_STATEMENT))
             {
-                Id = GetDataValue<int>(dr, "Id"),
-                Nombre = GetDataValue<string>(dr, "Nombre"),
-                TipoSala = GetDataValue<string>(dr, "TipoSala")
-            };
-            return entidad;
+                db.AddInParameter(cmd, "@Id", DbType.Int32, id);
+                db.ExecuteNonQuery(cmd);
+            }
+        }
+
+        private Sala LoadSala(IDataReader dr)
+        {
+            Sala Sala = new Sala();
+            Sala.Id = GetDataValue<int>(dr, "Id");
+            Sala.Nombre = GetDataValue<string>(dr, "Nombre");
+            Sala.TipoSala = GetDataValue<string>(dr, "TipoSala");
+            return Sala;
         }
     }
 }
+

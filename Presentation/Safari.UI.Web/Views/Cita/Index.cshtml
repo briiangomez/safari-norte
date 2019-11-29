@@ -1,0 +1,84 @@
+﻿@model IEnumerable<Safari.Entities.Cita>
+
+@{
+    ViewBag.Title = "Listado de Citas";
+}
+
+<h2>Listado de Citas</h2>
+
+<p>
+    <a id="btnCreate" class="btn btn-sm btn-info" style="margin-top: 10px; margin-bottom: 10px;" data-fancybox data-type="iframe" data-src="@Url.Action("Create", "Cita")" href="javascript:;">Agendar nueva cita</a>
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Fecha)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MedicoId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PacienteId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SalaId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TipoServicioId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Estado)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Fecha)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MedicoId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PacienteId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SalaId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TipoServicioId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Estado)
+        </td>
+        <td>
+            <a id="btnDetails" data-fancybox data-type="iframe" data-src="@Url.Action("Details", "Cita", new { id = item.Id })" href="javascript:;" style="margin-right: 10px;"><i class="glyphicon glyphicon-eye-open"></i></a>
+            <a id="btnEdit" data-fancybox data-type="iframe" data-src="@Url.Action("Edit", "Cita", new { id = item.Id })" href="javascript:;" style="margin-right: 10px;"><i class="glyphicon glyphicon-edit"></i></a>
+            <a id="btnDelete" data-fancybox data-type="iframe" data-src="@Url.Action("Delete", "Cita", new { id = item.Id })" href="javascript:;" style="margin-right: 10px;"><i class="glyphicon glyphicon-remove"></i></a>
+        </td>
+    </tr>
+}
+
+</table>
+
+@section Scripts {
+    <script>
+        $("a#btnCreate").fancybox({
+            'afterClose': function () { window.location.reload(); },
+            iframe: { css: { width: '750px' } }
+        });
+        $("a#btnEdit").fancybox({
+            'afterClose': function () { window.location.reload(); },
+            iframe: { css: { width: '750px' } }
+        });
+        $("a#btnDetails").fancybox({
+            'afterClose': function () { window.location.reload(); },
+            iframe: { css: { width: '750px' } }
+        });
+        $("a#btnDelete").fancybox({
+            'afterClose': function () { window.location.reload(); },
+            iframe: { css: { width: '750px' } }
+        });
+    </script>
+}
