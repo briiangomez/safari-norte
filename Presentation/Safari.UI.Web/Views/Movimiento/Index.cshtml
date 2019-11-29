@@ -1,4 +1,6 @@
-﻿@model IEnumerable<Safari.Entities.Movimiento>
+﻿@model PagedList.IPagedList<Safari.Entities.Movimiento>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 
 @{
     ViewBag.Title = "Listado de Movimientos";
@@ -12,17 +14,18 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Fecha)
+            @Html.ActionLink("Fecha", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ClienteId)
+            @Html.ActionLink("Cliente", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.TipoMovimientoId)
+            @Html.Raw("Tipo")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Valor)
+            @Html.Raw("Valor")
         </th>
+        <th></th>
     </tr>
 
 @foreach (var item in Model) {
@@ -31,36 +34,41 @@
             @Html.DisplayFor(modelItem => item.Fecha)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.ClienteId)
+            @Html.DisplayFor(modelItem => item.Cliente.Nombre) @Html.DisplayFor(modelItem => item.Cliente.Apellido)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.TipoMovimientoId)
+            @Html.DisplayFor(modelItem => item.TipoMovimiento.Nombre)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Valor)
+        </td>
+        <td>
+            <a id="btnDetails" data-fancybox data-type="iframe" data-src="@Url.Action("Details", new { id = item.Id })" href="javascript:;" class="btn btn-xs btn-info"><i class="glyphicon glyphicon-eye-open"></i> Detalle</a>
+            <a id="btnEdit" data-fancybox data-type="iframe" data-src="@Url.Action("Edit",  new { id = item.Id })" href="javascript:;" class="btn btn-xs btn-success"><i class="glyphicon glyphicon-edit"></i> Editar</a>
+            <a id="btnDelete" data-fancybox data-type="iframe" data-src="@Url.Action("Delete", new { id = item.Id })" href="javascript:;" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-remove"></i> Eliminar</a>
         </td>
     </tr>
 }
 
 </table>
+<br />
+    Página @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de @Model.PageCount
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
 
-@section Scripts {
-    <script>
+
+    @section Scripts {
+        <script>
         $("a#btnCreate").fancybox({
-            'afterClose': function () { window.location.reload(); },
-            iframe: { css: { width: '750px' } }
+            'afterClose': function () { window.location.reload(); }
         });
         $("a#btnEdit").fancybox({
-            'afterClose': function () { window.location.reload(); },
-            iframe: { css: { width: '750px' } }
+            'afterClose': function () { window.location.reload(); }
         });
         $("a#btnDetails").fancybox({
-            'afterClose': function () { window.location.reload(); },
-            iframe: { css: { width: '750px' } }
+            'afterClose': function () { window.location.reload(); }
         });
         $("a#btnDelete").fancybox({
-            'afterClose': function () { window.location.reload(); },
-            iframe: { css: { width: '750px' } }
+            'afterClose': function () { window.location.reload(); }
         });
-    </script>
-}
+        </script>
+    }

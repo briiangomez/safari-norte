@@ -1,4 +1,7 @@
-﻿@model IEnumerable<Safari.Entities.Cita>
+﻿
+@model PagedList.IPagedList<Safari.Entities.Cita>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 
 @{
     ViewBag.Title = "Listado de Citas";
@@ -9,25 +12,31 @@
 <p>
     <a id="btnCreate" class="btn btn-sm btn-info" style="margin-top: 10px; margin-bottom: 10px;" data-fancybox data-type="iframe" data-src="@Url.Action("Create", "Cita")" href="javascript:;">Agendar nueva cita</a>
 </p>
+@using (Html.BeginForm("Index", "Cita", FormMethod.Get))
+{
+    <p style="margin: 8px;">
+        Buscar por Nombre: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+        <input type="submit" value="Buscar" class="btn btn-sm btn-info" style="margin: 8px; padding: 5px; padding-left: 15px; padding-right: 15px;" />
+    </p>
+}
+<hr />
+
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Fecha)
+            @Html.Raw("Fecha")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.MedicoId)
+           @Html.ActionLink("Medico", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.PacienteId)
+            @Html.ActionLink("Paciente", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.SalaId)
+           @Html.Raw("Sala")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.TipoServicioId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Estado)
+           @Html.Raw("Estado")
         </th>
         <th></th>
     </tr>
@@ -38,29 +47,32 @@
             @Html.DisplayFor(modelItem => item.Fecha)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.MedicoId)
+            @Html.DisplayFor(modelItem => item.Medico.Nombre) @Html.DisplayFor(modelItem => item.Medico.Apellido)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.PacienteId)
+            @Html.DisplayFor(modelItem => item.Paciente.Nombre)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.SalaId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TipoServicioId)
+            @Html.DisplayFor(modelItem => item.Sala.Nombre)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Estado)
         </td>
         <td>
-            <a id="btnDetails" data-fancybox data-type="iframe" data-src="@Url.Action("Details", "Cita", new { id = item.Id })" href="javascript:;" style="margin-right: 10px;"><i class="glyphicon glyphicon-eye-open"></i></a>
-            <a id="btnEdit" data-fancybox data-type="iframe" data-src="@Url.Action("Edit", "Cita", new { id = item.Id })" href="javascript:;" style="margin-right: 10px;"><i class="glyphicon glyphicon-edit"></i></a>
-            <a id="btnDelete" data-fancybox data-type="iframe" data-src="@Url.Action("Delete", "Cita", new { id = item.Id })" href="javascript:;" style="margin-right: 10px;"><i class="glyphicon glyphicon-remove"></i></a>
+            <a id="btnDetails" data-fancybox data-type="iframe" data-src="@Url.Action("Details", new { id = item.Id })" href="javascript:;" class="btn btn-xs btn-info"><i class="glyphicon glyphicon-eye-open"></i> Detalle</a>
+            <a id="btnEdit" data-fancybox data-type="iframe" data-src="@Url.Action("Edit", new { id = item.Id })" href="javascript:;" class="btn btn-xs btn-success"><i class="glyphicon glyphicon-edit"></i> Editar</a>
+            <a id="btnDelete" data-fancybox data-type="iframe" data-src="@Url.Action("Delete",  new { id = item.Id })" href="javascript:;" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-remove"></i> Eliminar</a>
         </td>
     </tr>
 }
 
 </table>
+
+<br />
+    Página @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de @Model.PageCount
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+
+
 
 @section Scripts {
     <script>

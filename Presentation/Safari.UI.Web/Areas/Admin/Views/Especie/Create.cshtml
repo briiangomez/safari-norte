@@ -3,14 +3,13 @@
     ViewBag.Title = "Nueva";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutEmpty.cshtml";
 }
-<h2>Nueva</h2>
 
 @using (Html.BeginForm("createEspecie"))
 {
     @Html.AntiForgeryToken()
 
     <div class="">
-        <h4>Especie</h4>
+        <h4>Nueva Especie</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">

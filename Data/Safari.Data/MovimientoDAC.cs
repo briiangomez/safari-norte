@@ -82,8 +82,9 @@ namespace Safari.Data
             movimiento.Id = GetDataValue<int>(dr, "Id");
             movimiento.Fecha = GetDataValue<DateTime>(dr, "Fecha");
             movimiento.ClienteId = GetDataValue<int>(dr, "ClienteId");
-            movimiento.Cliente = movimiento.ClienteId > 0 ? new ClienteDAC().ReadBy(movimiento.ClienteId) : null;
+            movimiento.Cliente = movimiento.ClienteId > 0 ? new ClienteDAC().ReadBy(movimiento.ClienteId) : new Cliente();
             movimiento.TipoMovimientoId = GetDataValue<int>(dr, "TipoMovimientoId");
+            movimiento.TipoMovimiento = movimiento.TipoMovimientoId > 0 ? new TipoMovimientoDAC().ReadBy(movimiento.TipoMovimientoId) : new TipoMovimiento();
             movimiento.Valor = GetDataValue<Decimal>(dr, "Valor");
             return movimiento;
         }

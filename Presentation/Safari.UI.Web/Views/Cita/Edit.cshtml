@@ -19,7 +19,8 @@
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Id)
-
+        <input type="hidden" name="ChangedDate" id="ChangedDate" value="@DateTime.Now" />
+        <input type="hidden" name="ChangedBy" id="ChangedBy" value="1" />
         <div class="form-group">
             @Html.LabelFor(model => model.Fecha, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">

@@ -1,42 +1,20 @@
 ﻿@model Safari.Entities.TipoMovimiento
-
 @{
     ViewBag.Title = "Eliminar";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutEmpty.cshtml";
+
 }
-
 <h2>Eliminar</h2>
-
-<h3>¿Está seguro que desea eliminar el registro?</h3>
+<h3>¿Está seguro que desea eliminar el Tipo de Movimiento "@Html.DisplayFor(model => model.Nombre)"?</h3>
 <br />
 <div>
-    <h4>Tipo de Movimiento</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Nombre)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Nombre)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Multiplicador)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Multiplicador)
-        </dd>
-
-    </dl>
-
-    @using (Html.BeginForm()) {
+    @using (Html.BeginForm())
+    {
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Eliminar" class="btn btn-sm btn-danger" />
-            @Html.ActionLink("Volver al listado", "Index", new { id = "new" }, htmlAttributes: new { @class = "btn btn-sm btn-info", @style = "margin-right: 10px" })
+            <input style="margin-right: 10px" type="submit" value="Eliminar" class="btn btn-sm btn-danger" onclick="parent.jQuery.fancybox.close()" />
+            <input type="button" value="Volver" class="btn btn-sm btn-info" onclick="parent.jQuery.fancybox.close()" />
         </div>
     }
 </div>

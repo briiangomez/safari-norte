@@ -22,7 +22,7 @@ namespace Safari.Entities
         public string Nombre { get; set; }
 
         [DisplayName("Multiplicador")]
-        [StringLength(3, MinimumLength = 1, ErrorMessage = "Debe tener entre 1 y 3 caracteres")]
+        [Range(1,999, ErrorMessage = "Debe tener entre 1 y 3 caracteres")]
         [RegularExpression("^[0-9]*$", ErrorMessage = "Debe ser un número")]
         [Required]
         public int Multiplicador { get; set; }

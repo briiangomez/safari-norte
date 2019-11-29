@@ -2,13 +2,11 @@
 
 @{
     ViewBag.Title = "Detalles";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutEmpty.cshtml";
 }
 
-<h2>Detalles</h2>
-
 <div>
-    <h4>Paciente</h4>
+    <h4>Detalles - Paciente</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -20,12 +18,13 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.ClienteId)
+            @Html.Raw("Cliente")
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.ClienteId)
-        </dd>
+            @Html.DisplayFor(model => model.Cliente.Nombre) @Html.DisplayFor(model => model.Cliente.Apellido)
+
+        </dd> 
 
         <dt>
             @Html.DisplayNameFor(model => model.FechaNacimiento)
@@ -36,11 +35,11 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.EspecieId)
+            @Html.Raw("Especie")
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.EspecieId)
+            @Html.DisplayFor(model => model.Especie.Nombre)
         </dd>
 
         <dt>
@@ -55,5 +54,4 @@
 </div>
 <p>
     @Html.ActionLink("Editar", "Edit", new { id = Model.Id }, new { @class = "btn btn-sm btn-info", @style = "margin-right: 10px" })
-    @Html.ActionLink("Volver al listado", "Index", new { id = Model.Id }, new { @class = "btn btn-sm btn-info", @style = "margin-right: 10px" })
-</p>
+    <input type="button" value="Volver" class="btn btn-sm btn-info" onclick="parent.jQuery.fancybox.close()" /></p>

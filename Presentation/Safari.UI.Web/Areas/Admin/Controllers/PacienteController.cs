@@ -15,10 +15,14 @@ namespace Safari.UI.Web.Areas.Admin.Controllers
     public class PacienteController : Controller
     {
         private IApiProcess<Paciente> process;
+        private IApiProcess<Cliente> Cliprocess;
+        private IApiProcess<Especie> Espprocess;
 
-        public PacienteController(IApiProcess<Paciente> process)
+        public PacienteController(IApiProcess<Paciente> process, IApiProcess<Cliente> cli, IApiProcess<Especie> esp)
         {
             this.process = process;
+            this.Cliprocess = cli;
+            this.Espprocess = esp;
         }
 
 
@@ -71,9 +75,28 @@ namespace Safari.UI.Web.Areas.Admin.Controllers
             return View(process.Ver(id));
         }
 
+
+        public ActionResult ListCliente(int id)
+        {
+            return View(new PacienteAPIProcess().GetByCliente(id));
+        }
         // GET: Paciente/Create
         public ActionResult Create()
         {
+            var medicos = Cliprocess.ListarTodos().Select(x =>
+                             new {
+                                 Id = x.Id,
+                                 Nombre = x.Apellido + " " + x.Nombre
+                             });
+            ViewBag.Clientes = new SelectList(medicos, "Id", "Nombre");
+
+            var pacientes = Espprocess.ListarTodos()
+                     .Select(x =>
+                             new {
+                                 Id = x.Id,
+                                 Nombre = x.Nombre
+                             });
+            ViewBag.Especies = new SelectList(pacientes, "Id", "Nombre");
             return View();
         }
 
@@ -101,7 +124,20 @@ namespace Safari.UI.Web.Areas.Admin.Controllers
                     MessageType = GenericMessages.danger,
                     ConstantMessage = true
                 };
+                var medicos = Cliprocess.ListarTodos().Select(x =>
+                 new {
+                     Id = x.Id,
+                     Nombre = x.Apellido + " " + x.Nombre
+                 });
+                ViewBag.Clientes = new SelectList(medicos, "Id", "Nombre");
 
+                var pacientes = Espprocess.ListarTodos()
+                         .Select(x =>
+                                 new {
+                                     Id = x.Id,
+                                     Nombre = x.Nombre
+                                 });
+                ViewBag.Especies = new SelectList(pacientes, "Id", "Nombre");
                 return View(Paciente);
             }
         }
@@ -109,6 +145,20 @@ namespace Safari.UI.Web.Areas.Admin.Controllers
         // GET: Paciente/Edit/5
         public ActionResult Edit(int id)
         {
+            var medicos = Cliprocess.ListarTodos().Select(x =>
+                    new {
+                        Id = x.Id,
+                        Nombre = x.Apellido + " " + x.Nombre
+                    });
+            ViewBag.Clientes = new SelectList(medicos, "Id", "Nombre");
+
+            var pacientes = Espprocess.ListarTodos()
+                     .Select(x =>
+                             new {
+                                 Id = x.Id,
+                                 Nombre = x.Nombre
+                             });
+            ViewBag.Especies = new SelectList(pacientes, "Id", "Nombre");
             return View(process.Ver(id));
         }
 

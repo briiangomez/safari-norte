@@ -14,10 +14,14 @@ namespace Safari.UI.Web.Areas.Admin.Controllers
     public class MovimientoController : Controller
     {
         private IApiProcess<Movimiento> process;
+        private IApiProcess<TipoMovimiento> Tipoprocess;
+        private IApiProcess<Cliente> Cliprocess;
 
-        public MovimientoController(IApiProcess<Movimiento> process)
+        public MovimientoController(IApiProcess<Movimiento> process, IApiProcess<TipoMovimiento> Tipoprocess, IApiProcess<Cliente> Cliprocess)
         {
             this.process = process;
+            this.Tipoprocess = Tipoprocess;
+            this.Cliprocess = Cliprocess;
         }
         // GET: Movimiento
         //public ActionResult Index()
@@ -54,6 +58,9 @@ namespace Safari.UI.Web.Areas.Admin.Controllers
                 case "name_desc":
                     Movimientos = Movimientos.OrderByDescending(s => s.Cliente.Nombre);
                     break;
+                case "date_desc":
+                    Movimientos = Movimientos.OrderByDescending(s => s.Fecha);
+                    break;
                 default:
                     Movimientos = Movimientos.OrderBy(s => s.Id);
                     break;
@@ -70,12 +77,26 @@ namespace Safari.UI.Web.Areas.Admin.Controllers
         // GET: Movimiento/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            return View(process.Ver(id));
         }
 
         // GET: Movimiento/Create
         public ActionResult Create()
         {
+            var medicos = Cliprocess.ListarTodos().Select(x =>
+                            new {
+                                Id = x.Id,
+                                Nombre = x.Apellido + " " + x.Nombre
+                            });
+            ViewBag.Clientes = new SelectList(medicos, "Id", "Nombre");
+
+            var pacientes = Tipoprocess.ListarTodos()
+                     .Select(x =>
+                             new {
+                                 Id = x.Id,
+                                 Nombre = x.Nombre
+                             });
+            ViewBag.TiposMovimiento = new SelectList(pacientes, "Id", "Nombre");
             return View();
         }
 
@@ -103,7 +124,20 @@ namespace Safari.UI.Web.Areas.Admin.Controllers
                     MessageType = GenericMessages.danger,
                     ConstantMessage = true
                 };
+                var medicos = Cliprocess.ListarTodos().Select(x =>
+                new {
+                    Id = x.Id,
+                    Nombre = x.Apellido + " " + x.Nombre
+                });
+                ViewBag.Clientes = new SelectList(medicos, "Id", "Nombre");
 
+                var pacientes = Tipoprocess.ListarTodos()
+                         .Select(x =>
+                                 new {
+                                     Id = x.Id,
+                                     Nombre = x.Nombre
+                                 });
+                ViewBag.TiposMovimiento = new SelectList(pacientes, "Id", "Nombre");
                 return View(Movimiento);
             }
         }
@@ -111,7 +145,21 @@ namespace Safari.UI.Web.Areas.Admin.Controllers
         // GET: Movimiento/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            var medicos = Cliprocess.ListarTodos().Select(x =>
+                   new {
+                       Id = x.Id,
+                       Nombre = x.Apellido + " " + x.Nombre
+                   });
+            ViewBag.Clientes = new SelectList(medicos, "Id", "Nombre");
+
+            var pacientes = Tipoprocess.ListarTodos()
+                     .Select(x =>
+                             new {
+                                 Id = x.Id,
+                                 Nombre = x.Nombre
+                             });
+            ViewBag.TiposMovimiento = new SelectList(pacientes, "Id", "Nombre");
+            return View(process.Ver(id));
         }
 
         // POST: Movimiento/Edit/5
@@ -146,7 +194,7 @@ namespace Safari.UI.Web.Areas.Admin.Controllers
         // GET: Movimiento/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            return View(process.Ver(id));
         }
 
         // POST: Movimiento/Delete/5

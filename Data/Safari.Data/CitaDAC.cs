@@ -123,11 +123,11 @@ namespace Safari.Data
             cita.Id = GetDataValue<int>(dr, "Id");
             cita.Fecha = GetDataValue<DateTime>(dr, "Fecha");
             cita.MedicoId = GetDataValue<int>(dr, "MedicoId");
-            cita.Medico = cita.MedicoId > 0 ? new MedicoDAC().ReadBy(cita.MedicoId) : null;
+            cita.Medico = cita.MedicoId > 0 ? new MedicoDAC().ReadBy(cita.MedicoId) : new Medico();
             cita.PacienteId = GetDataValue<int>(dr, "PacienteId");
-            cita.Paciente = cita.PacienteId > 0 ? new PacienteDAC().ReadBy(cita.PacienteId) : null;
+            cita.Paciente = cita.PacienteId > 0 ? new PacienteDAC().ReadBy(cita.PacienteId) : new Paciente();
             cita.SalaId = GetDataValue<int>(dr, "SalaId");
-            cita.Sala = cita.SalaId > 0 ? new SalaDAC().ReadBy(cita.SalaId) : null;
+            cita.Sala = cita.SalaId > 0 ? new SalaDAC().ReadBy(cita.SalaId) : new Sala();
             cita.TipoServicioId = GetDataValue<int>(dr, "TipoServicioId");
             cita.Estado = GetDataValue<string>(dr, "Estado");
             cita.CreatedDate = GetDataValue<DateTime>(dr, "CreatedDate");

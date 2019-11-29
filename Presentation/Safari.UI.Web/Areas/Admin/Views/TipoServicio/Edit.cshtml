@@ -28,15 +28,13 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Guardar" class="btn btn-sm btn-success" />
-            </div>
+                <input style="margin-right: 10px" type="submit" value="Guardar" class="btn btn-sm btn-success" onclick="parent.jQuery.fancybox.close()" />
+                <input type="button" value="Volver" class="btn btn-sm btn-info" onclick="parent.jQuery.fancybox.close()" />
+                        </div>
         </div>
     </div>
 }
 
-<div>
-    @Html.ActionLink("Volver al listado", "Index", new { id = "new" }, htmlAttributes: new { @class = "btn btn-sm btn-info", @style = "margin-right: 10px" })
-</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

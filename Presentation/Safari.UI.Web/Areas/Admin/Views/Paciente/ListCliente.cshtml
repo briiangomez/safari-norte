@@ -1,12 +1,11 @@
-﻿@model PagedList.IPagedList<Safari.Entities.Paciente>
+﻿@model List<Safari.Entities.Paciente>
 @using PagedList.Mvc;
 @{
-    ViewBag.Title = "Listado de Pacientes";
-    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Listado de Pacientes por Cliente";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutEmpty.cshtml";
 }
 
-<h2>Listado de Pacientes</h2>
-
+<h2>Listado de Pacientes por Cliente</h2>
 <div>
     <a id="btnCreate" class="btn btn-sm btn-info" style="margin-top: 10px; margin-bottom: 10px;" data-fancybox data-type="iframe" data-src="@Url.Action("Create")" href="javascript:;">Crear Nuevo Paciente</a>
 </div>
@@ -29,6 +28,7 @@
         </th>
         <th></th>
     </tr>
+
     @foreach (var item in Model)
     {
         <tr>
@@ -37,7 +37,6 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Cliente.Nombre) @Html.DisplayFor(modelItem => item.Cliente.Apellido)
-
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.FechaNacimiento)
@@ -55,31 +54,28 @@
             </td>
         </tr>
     }
+
 </table>
 
-
-<br />
-    Página @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de @Model.PageCount
-    @Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
 
 
     @section Scripts {
         <script>
         $("a#btnCreate").fancybox({
             'afterClose': function () { window.location.reload(); },
-            iframe: { css: { width: '750px' } }
+            //iframe: { css: { width: '750px' } }
         });
         $("a#btnEdit").fancybox({
             'afterClose': function () { window.location.reload(); },
-            iframe: { css: { width: '750px' } }
+            //iframe: { css: { width: '750px' } }
         });
         $("a#btnDetails").fancybox({
             'afterClose': function () { window.location.reload(); },
-            iframe: { css: { width: '750px' } }
+            //iframe: { css: { width: '750px' } }
         });
         $("a#btnDelete").fancybox({
             'afterClose': function () { window.location.reload(); },
-            iframe: { css: { width: '750px' } }
+            //iframe: { css: { width: '750px' } }
         });
         </script>
     }

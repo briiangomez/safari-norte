@@ -1,20 +1,20 @@
-﻿@*@model IEnumerable<Safari.Entities.Cliente>*@
-
-@model PagedList.IPagedList<Safari.Entities.Cliente>
+﻿@model PagedList.IPagedList<Safari.Entities.Cliente>
 @using PagedList.Mvc;
 <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 
 
 @{
     ViewBag.Title = "Listado de Clientes";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
 <h2>Listado de Clientes</h2>
 
-<div>
-    @Html.ActionLink("Nueva", "Create", new { id = "new" }, htmlAttributes: new { @class = "btn btn-sm btn-info", @style = "margin: 8px; padding: 5px; padding-left: 15px; padding-right: 15px;" })
-</div>
-
+<p>
+    <a id="btnCreate" class="btn btn-primary" data-fancybox data-type="iframe" data-src="@Url.Action("Create", "Cliente")" href="javascript:;">
+        Nuevo Cliente
+    </a>
+</p>
 @using (Html.BeginForm("Index", "Cliente", FormMethod.Get))
 {
     <p style="margin: 8px;">
@@ -64,10 +64,10 @@
                 @Html.DisplayFor(modelItem => item.FechaNacimiento)
             </td>
             <td>
-                @Html.ActionLink("Ver pacientes", "IndexPorCliente", "Paciente", new { cliente = item.Id }, htmlAttributes: new { @class = "btn btn-sm btn-info", @style = "margin-right: 10px;" })
-                @Html.ActionLink("Ver detalles", "Details", new { id = item.Id }, htmlAttributes: new { @class = "btn btn-sm btn-info", @style = "margin-right: 10px;" })
-                @Html.ActionLink("Editar", "Edit", new { id = item.Id }, htmlAttributes: new { @class = "btn btn-sm btn-info", @style = "margin-right: 10px" })
-                @Html.ActionLink("Eliminar", "Delete", new { id = item.Id }, htmlAttributes: new { @class = "btn btn-sm btn-danger" })
+                <a id="btnDetailsP" data-fancybox data-type="iframe" data-src="@Url.Action("ListCliente", "Paciente", new { id = item.Id })" href="javascript:;" class="btn btn-xs btn-info"><i class="glyphicon glyphicon-icon-dog"></i> Pacientes</a>
+                <a id="btnDetails" data-fancybox data-type="iframe" data-src="@Url.Action("Details", new { id = item.Id })" href="javascript:;" class="btn btn-xs btn-info"><i class="glyphicon glyphicon-eye-open"></i> Detalle</a>
+                <a id="btnEdit" data-fancybox data-type="iframe" data-src="@Url.Action("Edit",  new { id = item.Id })" href="javascript:;" class="btn btn-xs btn-success"><i class="glyphicon glyphicon-edit"></i> Editar</a>
+                <a id="btnDelete" data-fancybox data-type="iframe" data-src="@Url.Action("Delete", new { id = item.Id })" href="javascript:;" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-remove"></i> Eliminar</a>
             </td>
         </tr>
     }
@@ -80,3 +80,23 @@
     @Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
 
 
+
+@section Scripts {
+    <script>
+        $("a#btnCreate").fancybox({
+            'afterClose': function () { window.location.reload(); }
+        });
+        $("a#btnEdit").fancybox({
+            'afterClose': function () { window.location.reload(); }
+        });
+        $("a#btnDetails").fancybox({
+            'afterClose': function () { window.location.reload(); }
+        });
+        $("a#btnDetailsP").fancybox({
+            'afterClose': function () { window.location.reload(); }
+        });
+        $("a#btnDelete").fancybox({
+            'afterClose': function () { window.location.reload(); }
+        });
+    </script>
+}

@@ -293,6 +293,7 @@
     <Content Include="Areas\Admin\Views\Log\Index.cshtml" />
     <None Include="Properties\PublishProfiles\pablo.pubxml" />
     <None Include="Properties\PublishProfiles\safari.pubxml" />
+    <None Include="Properties\PublishProfiles\Safarii.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <None Include="Scripts\jquery-2.2.4.intellisense.js" />
     <Content Include="Scripts\datepicker\datepicker-esAR.js" />
@@ -381,7 +382,7 @@
     <Content Include="Areas\Admin\Views\Paciente\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\Paciente\Edit.cshtml" />
     <Content Include="Views\Shared\_MenuAdminPartial.cshtml" />
-    <Content Include="Areas\Admin\Views\Paciente\IndexPorCliente.cshtml" />
+    <Content Include="Areas\Admin\Views\Paciente\ListCliente.cshtml" />
     <Content Include="Areas\Admin\Views\Paciente\List.cshtml" />
     <Content Include="Views\Shared\_LayoutEmpty.cshtml" />
     <Content Include="Areas\Admin\Views\Medico\Create.cshtml" />

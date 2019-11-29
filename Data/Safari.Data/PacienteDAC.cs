@@ -124,7 +124,9 @@ namespace Safari.Data
             paciente.Id = GetDataValue<int>(dr, "Id");
             paciente.Nombre = GetDataValue<string>(dr, "Nombre");
             paciente.ClienteId = GetDataValue<int>(dr, "ClienteId");
+            paciente.Cliente = paciente.ClienteId > 0 ? new ClienteDAC().ReadBy(paciente.ClienteId) : new Cliente();
             paciente.EspecieId = GetDataValue<int>(dr, "EspecieId");
+            paciente.Especie = paciente.EspecieId > 0 ? new EspecieDAC().ReadBy(paciente.EspecieId) : new Especie();
             paciente.FechaNacimiento = GetDataValue<DateTime>(dr, "FechaNacimiento");
             paciente.Observacion = GetDataValue<string>(dr, "Observacion");
             return paciente;

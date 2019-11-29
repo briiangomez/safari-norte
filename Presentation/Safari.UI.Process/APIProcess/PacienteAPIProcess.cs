@@ -23,7 +23,7 @@ namespace Safari.UI.Process.APIProcess
             var result = default(List<Paciente>);
             try
             {
-                var response = HttpGet<ListarPacienteResponse>(Prefix + $"/Buscar/{id}", new Dictionary<string, object>(), MediaType.Json);
+                var response = HttpGet<ListarPacienteResponse>(Prefix + $"/ListarByCliente/{id}", new Dictionary<string, object>(), MediaType.Json);
                 result = response.Result;
             }
             catch (FaultException fex)

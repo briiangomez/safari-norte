@@ -50,8 +50,6 @@ namespace Safari.Data
                     }
                 }
             }
-            var log = ServiceFactory.Get<ILoggingService>();
-            log.Log("Listado de clientes");
             return result;
         }
 		

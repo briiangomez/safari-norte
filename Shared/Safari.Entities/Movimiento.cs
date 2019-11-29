@@ -29,6 +29,7 @@ namespace Safari.Entities
         [DisplayName("TipoMovimientoId")]
         [Required]
         public int TipoMovimientoId { get; set; }
+        public TipoMovimiento TipoMovimiento { get; set; }
 
         [DisplayName("Valor")]
         [Required]

@@ -77,7 +77,7 @@ namespace Safari.UI.Web.Areas.Admin.Controllers
                 case "name_desc":
                     clientes = clientes.OrderByDescending(s => s.Apellido);
                     break;
-                case "Date":
+                case "date_desc":
                     clientes = clientes.OrderBy(s => s.FechaNacimiento);
                     break;
                 default:

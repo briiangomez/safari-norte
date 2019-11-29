@@ -70,7 +70,7 @@ namespace Safari.UI.Web.Areas.Admin.Controllers
         // GET: TipoServicio/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            return View(process.Ver(id));
         }
 
         // GET: TipoServicio/Create
@@ -111,7 +111,7 @@ namespace Safari.UI.Web.Areas.Admin.Controllers
         // GET: TipoServicio/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            return View(process.Ver(id));
         }
 
         // POST: TipoServicio/Edit/5
@@ -146,7 +146,7 @@ namespace Safari.UI.Web.Areas.Admin.Controllers
         // GET: TipoServicio/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            return View(process.Ver(id));
         }
 
         // POST: TipoServicio/Delete/5

@@ -73,7 +73,7 @@ namespace Safari.UI.Web.Areas.Admin.Controllers
         // GET: EspecieAPI/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            return View(process.Ver(id));
         }
 
         // GET: EspecieAPI/Create
@@ -114,7 +114,7 @@ namespace Safari.UI.Web.Areas.Admin.Controllers
         // GET: EspecieAPI/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            return View(process.Ver(id));
         }
 
         // POST: EspecieAPI/Edit/5
@@ -149,7 +149,7 @@ namespace Safari.UI.Web.Areas.Admin.Controllers
         // GET: EspecieAPI/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            return View(process.Ver(id));
         }
 
         // POST: EspecieAPI/Delete/5

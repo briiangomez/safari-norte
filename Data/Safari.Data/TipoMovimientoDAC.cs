@@ -19,7 +19,7 @@ namespace Safari.Data
             var db = DatabaseFactory.CreateDatabase(CONNECTION_NAME);
             using (DbCommand cmd = db.GetSqlStringCommand(SQL_STATEMENT))
             {
-                db.AddInParameter(cmd, "@Nombre", DbType.AnsiString, TipoMovimiento.Nombre);
+                db.AddInParameter(cmd, "@Nombre", DbType.String, TipoMovimiento.Nombre);
                 db.AddInParameter(cmd, "@Multiplicador", DbType.Int16, TipoMovimiento.Multiplicador);
                 TipoMovimiento.Id = Convert.ToInt32(db.ExecuteScalar(cmd));
             }

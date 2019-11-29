@@ -1,58 +1,95 @@
-﻿@model IEnumerable<Safari.Entities.Medico>
+﻿@model PagedList.IPagedList<Safari.Entities.Medico>
+@using PagedList.Mvc;
+
 
 @{
     ViewBag.Title = "Listado de Medicos";
-}
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 
+}
 <h2>Listado de Medicos</h2>
 
-<div>
-    @Html.ActionLink("Nueva", "Create", new { id = "new" }, htmlAttributes: new { @class = "btn btn-sm btn-info", @style = "margin: 8px; padding: 5px; padding-left: 15px; padding-right: 15px;" })
-</div>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.TipoMatricula)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.NumeroMatricula)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Apellido)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Nombre)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Especialidad)
-        </th>
-        <th>
-        </th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.TipoMatricula)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NumeroMatricula)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Apellido)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Nombre)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Especialidad)
-        </td>
-        <td>
-            @Html.ActionLink("Ver detalles", "Details", new { id = item.Id }, htmlAttributes: new { @class = "btn btn-sm btn-info", @style = "margin-right: 10px;" })
-            @Html.ActionLink("Editar", "Edit", new { id = item.Id }, htmlAttributes: new { @class = "btn btn-sm btn-info", @style = "margin-right: 10px" })
-            @Html.ActionLink("Eliminar", "Delete", new { id = item.Id }, htmlAttributes: new { @class = "btn btn-sm btn-danger" })
-        </td>
-    </tr>
+<p>
+    @*@Html.ActionLink("Create New", "Create")*@
+    <a id="btnCreate" class="btn btn-primary" data-fancybox data-type="iframe" data-src="@Url.Action("Create", "Medico")" href="javascript:;">
+        Nuevo Medico
+    </a>
+</p>
+@using (Html.BeginForm("Index", "Medico", FormMethod.Get))
+{
+    <p>
+        Buscar por Nombre: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+        <input type="submit" value="Buscar" />
+    </p>
 }
 
+<table class="table table-bordered">
+    <tr>
+        <th>
+            @Html.ActionLink("Apellido", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
+        </th>
+        <th>
+            @Html.Raw("Nombre")
+        </th>
+        <th>
+            @Html.Raw("Email")
+        </th>
+        <th>
+            @Html.Raw("Telefono")
+        </th>
+        <th>
+            @Html.Raw("Especialidad")
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Apellido)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Telefono)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Especialidad)
+            </td>
+            <td>
+                <a id="btnDetails" data-fancybox data-type="iframe" data-src="@Url.Action("Details", new { id = item.Id })" href="javascript:;" class="btn btn-xs btn-info"><i class="glyphicon glyphicon-eye-open"></i> Detalle</a>
+                <a id="btnEdit" data-fancybox data-type="iframe" data-src="@Url.Action("Edit",  new { id = item.Id })" href="javascript:;" class="btn btn-xs btn-success"><i class="glyphicon glyphicon-edit"></i> Editar</a>
+                <a id="btnDelete" data-fancybox data-type="iframe" data-src="@Url.Action("Delete", new { id = item.Id })" href="javascript:;" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-remove"></i> Eliminar</a>
+            </td>
+        </tr>
+    }
+
 </table>
+
+
+<br />
+Página @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+
+@section Scripts {
+    <script>
+        $("a#btnCreate").fancybox({
+            'afterClose': function () { window.location.reload(); }
+        });
+        $("a#btnEdit").fancybox({
+            'afterClose': function () { window.location.reload(); }
+        });
+        $("a#btnDetails").fancybox({
+            'afterClose': function () { window.location.reload(); }
+        });
+        $("a#btnDelete").fancybox({
+            'afterClose': function () { window.location.reload(); }
+        });
+    </script>
+}

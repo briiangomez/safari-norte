@@ -2,14 +2,12 @@
 
 @{
     ViewBag.Title = "Detalles";
-    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutEmpty.cshtml";
 
 }
 
-<h2>Detalles</h2>
-
 <div>
-    <h4>Cliente</h4>
+    <h4>Detalles - Cliente</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -71,6 +69,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Editar", "Edit", new { id = Model.Id }, new { @class = "btn btn-sm btn-info", @style = "margin-right: 10px" })
-    @Html.ActionLink("Volver al listado", "Index", new { id = Model.Id }, new { @class = "btn btn-sm btn-info", @style = "margin-right: 10px" })
+    <a style="margin-right: 10px;" class="btn btn-sm btn-info" href="@Url.Action("Edit", new { id = Model.Id })">Editar</a>
+    <input type="button" value="Volver" class="btn btn-sm btn-info" onclick="parent.jQuery.fancybox.close()" />
 </p>

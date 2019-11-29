@@ -23,6 +23,8 @@ namespace Safari.Entities
         [DisplayName("Cliente")]
         public int ClienteId { get; set; }
 
+        public Cliente Cliente { get; set; }
+
         [DisplayName("Fecha de nacimiento")]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         [Required]
@@ -31,6 +33,7 @@ namespace Safari.Entities
         [DisplayName("Especie")]
         [Required]
         public int EspecieId { get; set; }
+        public Especie Especie { get; set; }
 
         [DisplayName("Observacion")]
         public string Observacion { get; set; }
