@@ -171,6 +171,8 @@ namespace Safari.UI.Web.Areas.Admin.Controllers
             try
             {
                 // TODO: Add insert logic here
+                var tip = Tipoprocess.Ver(Movimiento.TipoMovimientoId);
+                Movimiento.Valor = Movimiento.Valor * tip.Multiplicador;
                 var result = process.Agregar(Movimiento);
                 TempData["MessageViewBagName"] = new GenericMessageViewModel
                 {
@@ -234,6 +236,8 @@ namespace Safari.UI.Web.Areas.Admin.Controllers
             try
             {
                 // TODO: Add insert logic here
+                var tip = Tipoprocess.Ver(Movimiento.TipoMovimientoId);
+                Movimiento.Valor = Movimiento.Valor * tip.Multiplicador;
                 process.Editar(Movimiento);
                 TempData["MessageViewBagName"] = new GenericMessageViewModel
                 {

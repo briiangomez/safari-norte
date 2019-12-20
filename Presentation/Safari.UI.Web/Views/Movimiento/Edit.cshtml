@@ -16,27 +16,27 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Fecha, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Fecha, "{0:dd/MM/yyyy}", new { htmlAttributes = new { @class = "form-control datefield", autocomplete = "off" } })
+                @Html.EditorFor(model => model.Fecha, "{0:dd/MM/yyyy}", new { htmlAttributes = new { @class = "form-control datefield", autocomplete = "off", @required = true } })
                 @Html.ValidationMessageFor(model => model.Fecha, "", new { @class = "text-danger" })
             </div>
         </div>
         <div class="form-group">
             <label class="control-label col-md-2">Cliente</label>
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.ClienteId, (SelectList)ViewBag.Clientes, "Seleccione", new { @class = "form-control" })
+                @Html.DropDownListFor(model => model.ClienteId, (SelectList)ViewBag.Clientes, "Seleccione", new { @class = "form-control", @required = true })
             </div>
         </div>
         <div class="form-group">
             <label class="control-label col-md-2"> Tipo de Movimiento</label>
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.TipoMovimientoId, (SelectList)ViewBag.TiposMovimiento, "Seleccione", new { @class = "form-control" })
+                @Html.DropDownListFor(model => model.TipoMovimientoId, (SelectList)ViewBag.TiposMovimiento, "Seleccione", new { @class = "form-control", @required = true })
             </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.Valor, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Valor, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.Valor, new { htmlAttributes = new { @class = "form-control", @required = true } })
                 @Html.ValidationMessageFor(model => model.Valor, "", new { @class = "text-danger" })
             </div>
         </div>
