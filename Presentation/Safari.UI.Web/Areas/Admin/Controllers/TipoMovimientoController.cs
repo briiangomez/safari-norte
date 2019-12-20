@@ -26,6 +26,7 @@ namespace Safari.UI.Web.Areas.Admin.Controllers
         //    return View(process.ListarTodos());
         //}
 
+        [Authorize(Roles = "Admin")]
         public ViewResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
 
@@ -68,12 +69,14 @@ namespace Safari.UI.Web.Areas.Admin.Controllers
 
 
         // GET: TipoMovimiento/Details/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Details(int id)
         {
             return View(process.Ver(id));
         }
 
         // GET: TipoMovimiento/Create
+        [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
             return View();
@@ -109,6 +112,7 @@ namespace Safari.UI.Web.Areas.Admin.Controllers
         }
 
         // GET: TipoMovimiento/Edit/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit(int id)
         {
             return View(process.Ver(id));
@@ -144,6 +148,7 @@ namespace Safari.UI.Web.Areas.Admin.Controllers
         }
 
         // GET: TipoMovimiento/Delete/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Delete(int id)
         {
             return View(process.Ver(id));

@@ -17,6 +17,7 @@ namespace Safari.UI.Web.Areas.Admin.Controllers
         {
             _loggingService = loggingService;
         }
+        [Authorize(Roles = "Admin")]
         public ActionResult Index()
         {
             IList<LogEntry> logs = new List<LogEntry>();
@@ -40,6 +41,7 @@ namespace Safari.UI.Web.Areas.Admin.Controllers
             return View(new ListLogViewModel { LogFiles = logs });
         }
 
+        [Authorize(Roles = "Admin")]
         public ActionResult ClearLog()
         {
             _loggingService.ClearLogFiles();

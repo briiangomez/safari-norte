@@ -35,6 +35,7 @@ namespace Safari.UI.Web.Controllers
         //    return View(process.ListarTodos());
         //}
         [Route("cita", Name = "CitaControllerRouteIndex")]
+        [Authorize]
         public ViewResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
 
@@ -78,6 +79,7 @@ namespace Safari.UI.Web.Controllers
 
 
         // GET: Cita/Details/5
+        [Authorize]
         public ActionResult Details(int id)
         {
             return View(process.Ver(id));
@@ -132,6 +134,7 @@ namespace Safari.UI.Web.Controllers
 
         // POST: Cita/Create
         [HttpPost]
+        [Authorize]
         public ActionResult Create(Cita Cita)
         {
             try
@@ -189,6 +192,7 @@ namespace Safari.UI.Web.Controllers
         }
 
         // GET: Cita/Edit/5
+        [Authorize]
         public ActionResult Edit(int id)
         {
             var medicos = Medicoprocess.ListarTodos().Select(x =>
@@ -254,6 +258,7 @@ namespace Safari.UI.Web.Controllers
         }
 
         // GET: Cita/Delete/5
+        [Authorize]
         public ActionResult Delete(int id)
         {
             return View(process.Ver(id));

@@ -26,6 +26,7 @@ namespace Safari.UI.Web.Areas.Admin.Controllers
         //    return View(process.ListarTodos());
         //}
 
+        [Authorize(Roles = "Admin")]
         public ViewResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
 
@@ -71,12 +72,14 @@ namespace Safari.UI.Web.Areas.Admin.Controllers
 
 
         // GET: EspecieAPI/Details/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Details(int id)
         {
             return View();
         }
 
         // GET: EspecieAPI/Create
+        [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
             return View();
@@ -112,6 +115,7 @@ namespace Safari.UI.Web.Areas.Admin.Controllers
         }
 
         // GET: EspecieAPI/Edit/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit(int id)
         {
             return View();
@@ -147,6 +151,7 @@ namespace Safari.UI.Web.Areas.Admin.Controllers
         }
 
         // GET: EspecieAPI/Delete/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Delete(int id)
         {
             return View();

@@ -30,6 +30,7 @@ namespace Safari.UI.Web.Areas.Admin.Controllers
         //    return View(process.ListarTodos());
         //}
 
+        [Authorize(Roles = "Admin")]
         public ViewResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
 
@@ -82,6 +83,7 @@ namespace Safari.UI.Web.Areas.Admin.Controllers
         //}
 
         // GET: EspecieAPI/Create
+        [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
             var tiposServicio = TipoSerprocess.ListarTodos()

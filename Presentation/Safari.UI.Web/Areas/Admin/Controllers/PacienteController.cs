@@ -26,6 +26,7 @@ namespace Safari.UI.Web.Areas.Admin.Controllers
         }
 
 
+        [Authorize(Roles = "Admin")]
         public ViewResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
 
@@ -76,11 +77,13 @@ namespace Safari.UI.Web.Areas.Admin.Controllers
         }
 
 
+        [Authorize(Roles = "Admin")]
         public ActionResult ListCliente(int id)
         {
             return View(new PacienteAPIProcess().GetByCliente(id));
         }
         // GET: Paciente/Create
+        [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
             var medicos = Cliprocess.ListarTodos().Select(x =>
@@ -143,6 +146,7 @@ namespace Safari.UI.Web.Areas.Admin.Controllers
         }
 
         // GET: Paciente/Edit/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit(int id)
         {
             var medicos = Cliprocess.ListarTodos().Select(x =>
@@ -192,6 +196,7 @@ namespace Safari.UI.Web.Areas.Admin.Controllers
         }
 
         // GET: Paciente/Delete/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Delete(int id)
         {
             return View(process.Ver(id));

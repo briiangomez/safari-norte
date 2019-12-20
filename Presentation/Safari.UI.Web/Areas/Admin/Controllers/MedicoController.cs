@@ -22,6 +22,7 @@ namespace Safari.UI.Web.Areas.Admin.Controllers
         }
 
 
+        [Authorize(Roles = "Admin")]
         public ViewResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
 
@@ -66,12 +67,14 @@ namespace Safari.UI.Web.Areas.Admin.Controllers
         }
 
         // GET: Medico/Details/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Details(int id)
         {
             return View(process.Ver(id));
         }
 
         // GET: Medico/Create
+        [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
             return View();
@@ -107,6 +110,7 @@ namespace Safari.UI.Web.Areas.Admin.Controllers
         }
 
         // GET: Medico/Edit/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit(int id)
         {
             return View(process.Ver(id));
@@ -142,6 +146,7 @@ namespace Safari.UI.Web.Areas.Admin.Controllers
         }
 
         // GET: Medico/Delete/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Delete(int id)
         {
             return View(process.Ver(id));

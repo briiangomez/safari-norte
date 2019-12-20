@@ -30,6 +30,7 @@ namespace Safari.UI.Web.Areas.Admin.Controllers
         //    return View(process.ListarTodos());
         //}
         [Route("movimiento", Name = "MovimientoControllerRouteIndex")]
+        [Authorize]
         public ViewResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
 
@@ -90,6 +91,7 @@ namespace Safari.UI.Web.Areas.Admin.Controllers
         }
 
         [Route("movimiento-por-cliente", Name = "MovimientoClienteControllerRouteIndex")]
+        [Authorize]
         public ViewResult IndexByCliente(int idCliente, string sortOrder, string currentFilter, string searchString, int? page)
         {
 
@@ -139,12 +141,14 @@ namespace Safari.UI.Web.Areas.Admin.Controllers
 
 
         // GET: Movimiento/Details/5
+        [Authorize]
         public ActionResult Details(int id)
         {
             return View(process.Ver(id));
         }
 
         // GET: Movimiento/Create
+        [Authorize]
         public ActionResult Create()
         {
             var medicos = Cliprocess.ListarTodos().Select(x =>
@@ -210,6 +214,7 @@ namespace Safari.UI.Web.Areas.Admin.Controllers
         }
 
         // GET: Movimiento/Edit/5
+        [Authorize]
         public ActionResult Edit(int id)
         {
             var medicos = Cliprocess.ListarTodos().Select(x =>
@@ -262,6 +267,7 @@ namespace Safari.UI.Web.Areas.Admin.Controllers
         }
 
         // GET: Movimiento/Delete/5
+        [Authorize]
         public ActionResult Delete(int id)
         {
             return View(process.Ver(id));
