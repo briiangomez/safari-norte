@@ -28,7 +28,8 @@
         firstDay: 1,
         isRTL: false,
         showMonthAfterYear: false,
-        yearSuffix: ""
+        yearSuffix: "",
+        weekends : false,
     };
     datepicker.setDefaults(datepicker.regional.es);
     return datepicker.regional.es;

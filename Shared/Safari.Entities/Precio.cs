@@ -29,6 +29,8 @@ namespace Safari.Entities
         [Required]
         public float Valor { get; set; }
 
+        public TipoServicio TipoServicio { get; set; }
+
         public override string ToString()
         {
             return this.GetType().Name + ": " +

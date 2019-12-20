@@ -2,7 +2,7 @@
 @model PagedList.IPagedList<Safari.Entities.Cita>
 @using PagedList.Mvc;
 <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
-
+<link href="~/Content/fullcalendar.min.css" rel="stylesheet" />
 @{
     ViewBag.Title = "Listado de Citas";
 }
@@ -12,7 +12,10 @@
 <p>
     <a id="btnCreate" class="btn btn-sm btn-info" style="margin-top: 10px; margin-bottom: 10px;" data-fancybox data-type="iframe" data-src="@Url.Action("Create", "Cita")" href="javascript:;">Agendar nueva cita</a>
 </p>
-@using (Html.BeginForm("Index", "Cita", FormMethod.Get))
+<div id="calendar" class="calendar">
+</div>
+<a id="btnEdit" data-fancybox data-type="iframe" style="display:none" href="javascript:;" class="btn btn-xs btn-success"><i class="glyphicon glyphicon-edit"></i> Editar</a>
+@*@using (Html.BeginForm("Index", "Cita", FormMethod.Get))
 {
     <p style="margin: 8px;">
         Buscar por Nombre: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
@@ -70,7 +73,7 @@
 
 <br />
     Página @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de @Model.PageCount
-    @Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))*@
 
 
 
@@ -92,5 +95,13 @@
             'afterClose': function () { window.location.reload(); },
             iframe: { css: { width: '750px' } }
         });
+
+
     </script>
+<script src='http://fullcalendar.io/js/fullcalendar-3.4.0/lib/moment.min.js'></script>
+<script src='http://fullcalendar.io/js/fullcalendar-3.4.0/lib/jquery.min.js'></script>
+<script src="http://fullcalendar.io/js/fullcalendar-3.4.0/lib/jquery-ui.custom.min.js"></script>
+<script src="~/Scripts/fullcalendar/fullcalendar.min.js"></script>
+<script src="~/Scripts/fullcalendar/locale/es.js"></script>
+<script src="~/Scripts/Citas.js"></script>
 }

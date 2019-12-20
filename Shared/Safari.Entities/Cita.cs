@@ -45,7 +45,9 @@ namespace Safari.Entities
         [DisplayName("Tipo de servicio")]
         [Required]
         public int TipoServicioId { get; set; }
-        
+
+        public TipoServicio TipoServicio { get; set; }
+
         [DisplayName("Estado")]
         [Required]
         public string Estado { get; set; }

@@ -102,6 +102,7 @@ namespace Safari.Data
         {
             Precio precio = new Precio();
             precio.TipoServicioId = GetDataValue<int>(dr, "TipoServicioId");
+            precio.TipoServicio = precio.TipoServicioId > 0 ? new TipoServicioDAC().ReadBy(precio.TipoServicioId) : new TipoServicio();
             precio.FechaDesde = GetDataValue<DateTime>(dr, "FechaDesde");
             precio.FechaHasta = GetDataValue<DateTime>(dr, "FechaHasta");
             precio.Valor = GetDataValue<float>(dr, "Valor");

@@ -1,0 +1,69 @@
+﻿@model PagedList.IPagedList<Safari.Entities.Precio>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Listado de Precios";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Listado de Especies</h2>
+
+<div>
+    <a id="btnCreate" class="btn btn-sm btn-info" style="margin-top: 10px; margin-bottom: 10px;" data-fancybox data-type="iframe" data-src="@Url.Action("Create", "Precio")" href="javascript:;">Crear nuevo Precio</a>
+</div>
+<table class="table table-hover">
+    <tr>
+        <th>
+            @Html.Raw("Tipo de Servicio")
+        </th>
+        <th>Fecha Desde</th>
+        <th>Fecha Hasta</th>
+        <th>Valor</th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.TipoServicio.Nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FechaDesde)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FechaHasta)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Valor)
+        </td>
+    </tr>
+}
+
+</table>
+
+
+<br />
+    Página @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de @Model.PageCount
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+
+
+
+
+@section Scripts {
+    <script>
+        $("a#btnCreate").fancybox({
+            'afterClose': function () { window.location.reload(); },
+            iframe: { css: { width: '750px' } }
+        });
+        $("a#btnEdit").fancybox({
+            'afterClose': function () { window.location.reload(); },
+            iframe: { css: { width: '750px' } }
+        });
+        $("a#btnDetails").fancybox({
+            'afterClose': function () { window.location.reload(); },
+            iframe: { css: { width: '750px' } }
+        });
+        $("a#btnDelete").fancybox({
+            'afterClose': function () { window.location.reload(); },
+            iframe: { css: { width: '750px' } }
+        });
+    </script>
+}

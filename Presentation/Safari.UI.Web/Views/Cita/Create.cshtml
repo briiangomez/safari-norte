@@ -26,28 +26,29 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.MedicoId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class= "control-label col-md-2">Medico</label>
             <div class="col-md-10">
                 @Html.DropDownListFor(model => model.MedicoId, (SelectList)ViewBag.Medicos, "Seleccione", new { @class = "form-control" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.PacienteId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2">Paciente</label>
             <div class="col-md-10">
                 @Html.DropDownListFor(model => model.PacienteId, (SelectList)ViewBag.Pacientes, "Seleccione", new { @class = "form-control" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.SalaId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2">Sala</label>
             <div class="col-md-10">
                 @Html.DropDownListFor(model => model.SalaId, (SelectList)ViewBag.Salas, "Seleccione", new { @class = "form-control" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.TipoServicioId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2">Tipo de Servicio</label>
+
             <div class="col-md-10">
                 @Html.DropDownListFor(model => model.TipoServicioId, (SelectList)ViewBag.TiposServicio, "Seleccione", new { @class = "form-control" })
             </div>
@@ -71,7 +72,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input style="margin-right: 10px" type="submit" value="Crear" class="btn btn-sm btn-success" onclick="parent.jQuery.fancybox.close()" />
+                <input style="margin-right: 10px" type="submit" value="Guardar" class="btn btn-sm btn-success" onclick="parent.jQuery.fancybox.close()" />
                 <input type="button" value="Volver" class="btn btn-sm btn-info" onclick="parent.jQuery.fancybox.close()" />
             </div>
         </div>
@@ -88,5 +89,10 @@
 
     <script src="~/Scripts/datepicker/datepicker-esAR.js"></script>
 
-
+    <script>
+        function closefancybox()
+        {
+            parent.jQuery.fancybox.close();
+        }
+    </script>
 }

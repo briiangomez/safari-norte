@@ -50,19 +50,35 @@ namespace Safari.UI.Web.Areas.Admin.Controllers
 
             var Movimientos = from c in process.ListarTodos() select c;
 
+            var Movimientoss = new List<MovimientoVM>();
+            var clientes = Cliprocess.ListarTodos();
+            foreach (var item in clientes)
+            {
+                var movs = Movimientos.Where(o => o.ClienteId == item.Id).OrderByDescending(o => o.Fecha);
+                if(movs.Count() > 0)
+                {
+                    MovimientoVM mov = new MovimientoVM();
+                    mov.Cliente = item;
+                    mov.idCliente = item.Id;
+                    mov.FechaUltimoMov = movs.FirstOrDefault().Fecha;
+                    mov.saldo = movs.Sum(o => o.Valor);
+                    Movimientoss.Add(mov);
+                }
+            }
+
             if (!string.IsNullOrEmpty(searchString))
-                Movimientos = Movimientos.Where(s => s.Cliente.Nombre.Contains(searchString));
+                Movimientoss = Movimientoss.Where(s => s.Cliente.Nombre.Contains(searchString)).ToList();
 
             switch (sortOrder)
             {
                 case "name_desc":
-                    Movimientos = Movimientos.OrderByDescending(s => s.Cliente.Nombre);
+                    Movimientoss = Movimientoss.OrderByDescending(s => s.Cliente.Nombre).ToList();
                     break;
                 case "date_desc":
-                    Movimientos = Movimientos.OrderByDescending(s => s.Fecha);
+                    Movimientoss = Movimientoss.OrderByDescending(s => s.FechaUltimoMov).ToList();
                     break;
                 default:
-                    Movimientos = Movimientos.OrderBy(s => s.Id);
+                    Movimientoss = Movimientoss.OrderBy(s => s.idCliente).ToList();
                     break;
             }
 
@@ -70,8 +86,56 @@ namespace Safari.UI.Web.Areas.Admin.Controllers
             //return View(clientes.ToList());
             int pageSize = 10;
             int pageNumber = (page ?? 1);
+            return View(Movimientoss.ToPagedList(pageNumber, pageSize));
+        }
+
+        [Route("movimiento-por-cliente", Name = "MovimientoClienteControllerRouteIndex")]
+        public ViewResult IndexByCliente(int idCliente, string sortOrder, string currentFilter, string searchString, int? page)
+        {
+
+            ViewBag.CurrentSort = sortOrder;
+
+            ViewBag.NameSortParm = string.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewBag.DateSortParm = sortOrder == "Date" ? "date_desc" : "Date";
+
+
+            if (searchString != null)
+                page = 1;
+            else
+                searchString = currentFilter;
+
+
+            ViewBag.CurrentFilter = searchString;
+
+
+            var Movimientos = from c in process.ListarTodos().Where(o => o.ClienteId == idCliente) select c;
+
+            if (!string.IsNullOrEmpty(searchString))
+                Movimientos = Movimientos.Where(s => s.Cliente.Nombre.Contains(searchString)).ToList();
+
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    Movimientos = Movimientos.OrderByDescending(s => s.Cliente.Nombre).ToList();
+                    break;
+                case "date_desc":
+                    Movimientos = Movimientos.OrderByDescending(s => s.Fecha ).ToList();
+                    break;
+                default:
+                    Movimientos = Movimientos.OrderBy(s => s.Id).ToList();
+                    break;
+            }
+
+
+            //return View(clientes.ToList());
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+            Cliente cli = Cliprocess.Ver(idCliente);
+            ViewBag.NombreCliente = cli.Nombre;
+            ViewBag.idCliente = idCliente;
             return View(Movimientos.ToPagedList(pageNumber, pageSize));
         }
+
 
 
         // GET: Movimiento/Details/5
@@ -114,7 +178,8 @@ namespace Safari.UI.Web.Areas.Admin.Controllers
                     MessageType = GenericMessages.success
                 };
 
-                return RedirectToAction("Index");
+                return RedirectToAction("IndexByCliente", new { id = Movimiento.ClienteId });
+
             }
             catch (Exception ex)
             {
@@ -176,7 +241,8 @@ namespace Safari.UI.Web.Areas.Admin.Controllers
                     MessageType = GenericMessages.success
                 };
 
-                return RedirectToAction("Index");
+                return RedirectToAction("IndexByCliente", new { id = Movimiento.ClienteId });
+
             }
             catch (Exception ex)
             {
@@ -212,7 +278,7 @@ namespace Safari.UI.Web.Areas.Admin.Controllers
                     MessageType = GenericMessages.success
                 };
 
-                return RedirectToAction("Index");
+                return RedirectToAction("IndexByCliente", new { id = esp.ClienteId });
             }
             catch (Exception ex)
             {

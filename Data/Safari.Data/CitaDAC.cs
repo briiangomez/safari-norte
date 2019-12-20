@@ -129,6 +129,7 @@ namespace Safari.Data
             cita.SalaId = GetDataValue<int>(dr, "SalaId");
             cita.Sala = cita.SalaId > 0 ? new SalaDAC().ReadBy(cita.SalaId) : new Sala();
             cita.TipoServicioId = GetDataValue<int>(dr, "TipoServicioId");
+            cita.TipoServicio = cita.TipoServicioId > 0 ? new TipoServicioDAC().ReadBy(cita.TipoServicioId) : new TipoServicio();
             cita.Estado = GetDataValue<string>(dr, "Estado");
             cita.CreatedDate = GetDataValue<DateTime>(dr, "CreatedDate");
             cita.CreatedBy = GetDataValue<int>(dr, "CreatedBy");

@@ -1,4 +1,4 @@
-﻿@model PagedList.IPagedList<Safari.Entities.Movimiento>
+﻿@model PagedList.IPagedList<Safari.UI.Web.Models.MovimientoVM>
 @using PagedList.Mvc;
 <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 
@@ -6,7 +6,7 @@
     ViewBag.Title = "Listado de Movimientos";
 }
 
-<h2>Listado de Movimientos</h2>
+<h2>Listado de Movimientos por Cliente</h2>
 
 <p>
     <a id="btnCreate" class="btn btn-sm btn-info" style="margin-top: 10px; margin-bottom: 10px;" data-fancybox data-type="iframe" data-src="@Url.Action("Create", "Movimiento")" href="javascript:;">Generar nuevo movimiento</a>
@@ -20,9 +20,6 @@
             @Html.ActionLink("Cliente", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
         </th>
         <th>
-            @Html.Raw("Tipo")
-        </th>
-        <th>
             @Html.Raw("Valor")
         </th>
         <th></th>
@@ -31,21 +28,31 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Fecha)
+            @Html.DisplayFor(modelItem => item.FechaUltimoMov)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Cliente.Nombre) @Html.DisplayFor(modelItem => item.Cliente.Apellido)
         </td>
+        @{
+            if (item.saldo > 0)
+            {
+                <td style="color:green">
+                    @Html.DisplayFor(modelItem => item.saldo)
+                </td>
+            }
+            else if(item.saldo < 0)
+            {
+                <td style="color:red">
+                    @Html.DisplayFor(modelItem => item.saldo)
+                </td>
+            }
+            else
+            {
+                <td>Sin Saldo</td>
+            }
+        }
         <td>
-            @Html.DisplayFor(modelItem => item.TipoMovimiento.Nombre)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Valor)
-        </td>
-        <td>
-            <a id="btnDetails" data-fancybox data-type="iframe" data-src="@Url.Action("Details", new { id = item.Id })" href="javascript:;" class="btn btn-xs btn-info"><i class="glyphicon glyphicon-eye-open"></i> Detalle</a>
-            <a id="btnEdit" data-fancybox data-type="iframe" data-src="@Url.Action("Edit",  new { id = item.Id })" href="javascript:;" class="btn btn-xs btn-success"><i class="glyphicon glyphicon-edit"></i> Editar</a>
-            <a id="btnDelete" data-fancybox data-type="iframe" data-src="@Url.Action("Delete", new { id = item.Id })" href="javascript:;" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-remove"></i> Eliminar</a>
+            <a id="btnDetails" data-fancybox data-type="iframe" data-src="@Url.Action("IndexByCliente", new { idCliente = item.idCliente })" href="javascript:;" class="btn btn-xs btn-info"><i class="glyphicon glyphicon-eye-open"></i> Movimientos</a>
         </td>
     </tr>
 }
@@ -58,17 +65,21 @@
 
     @section Scripts {
         <script>
-        $("a#btnCreate").fancybox({
-            'afterClose': function () { window.location.reload(); }
-        });
-        $("a#btnEdit").fancybox({
-            'afterClose': function () { window.location.reload(); }
-        });
-        $("a#btnDetails").fancybox({
-            'afterClose': function () { window.location.reload(); }
-        });
-        $("a#btnDelete").fancybox({
-            'afterClose': function () { window.location.reload(); }
-        });
+            $("a#btnCreate").fancybox({
+                'afterClose': function () { window.location.reload(); },
+                iframe: { css: { width: '750px' } }
+            });
+            $("a#btnEdit").fancybox({
+                'afterClose': function () { window.location.reload(); },
+                iframe: { css: { width: '750px' } }
+            });
+            $("a#btnDetails").fancybox({
+                'afterClose': function () { window.location.reload(); },
+                iframe: { css: { width: '750px' } }
+            });
+            $("a#btnDelete").fancybox({
+                'afterClose': function () { window.location.reload(); },
+                iframe: { css: { width: '750px' } }
+            });
         </script>
     }

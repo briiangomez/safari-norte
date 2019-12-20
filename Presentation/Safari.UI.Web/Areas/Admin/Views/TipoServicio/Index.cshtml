@@ -24,6 +24,7 @@
                 @Html.DisplayFor(modelItem => item.Nombre)
             </td>
             <td>
+
                 <a id="btnDetails" data-fancybox data-type="iframe" data-src="@Url.Action("Details", new { id = item.Id })" href="javascript:;" class="btn btn-xs btn-info"><i class="glyphicon glyphicon-eye-open"></i> Detalle</a>
                 <a id="btnEdit" data-fancybox data-type="iframe" data-src="@Url.Action("Edit",  new { id = item.Id })" href="javascript:;" class="btn btn-xs btn-success"><i class="glyphicon glyphicon-edit"></i> Editar</a>
                 <a id="btnDelete" data-fancybox data-type="iframe" data-src="@Url.Action("Delete", new { id = item.Id })" href="javascript:;" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-remove"></i> Eliminar</a>

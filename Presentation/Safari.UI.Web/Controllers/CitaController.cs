@@ -119,6 +119,17 @@ namespace Safari.UI.Web.Controllers
             return View();
         }
 
+        public ActionResult ObtenerCitas()
+        {
+            return Json(process.ListarTodos().Select(x => new {
+                Desc = x.Medico.Nombre + " " + x.Medico.Apellido + "- " + x.Medico.Especialidad,
+                Start_Date = x.Fecha,
+                End_Date = x.Fecha.AddHours(1),
+                Title = x.TipoServicio.Nombre + " - " + x.Paciente.Nombre,
+                url = "/Cita/Details/" + x.Id
+            }), JsonRequestBehavior.AllowGet);
+        }
+
         // POST: Cita/Create
         [HttpPost]
         public ActionResult Create(Cita Cita)
@@ -126,6 +137,9 @@ namespace Safari.UI.Web.Controllers
             try
             {
                 // TODO: Add insert logic here
+                Cita.Fecha = this.GetCitas(Cita.Fecha);
+                if (Cita.Fecha.Hour == 0)
+                    throw new Exception("No se puede cargar mas citas durante el dia de hoy!");
                 var result = process.Agregar(Cita);
                 TempData["MessageViewBagName"] = new GenericMessageViewModel
                 {
@@ -145,6 +159,32 @@ namespace Safari.UI.Web.Controllers
                 };
 
                 return View(Cita);
+            }
+        }
+
+        public DateTime GetCitas(DateTime hora)
+        {
+            try
+            {
+                var man = hora.AddDays(1);
+                var citas = process.ListarTodos().Where(o => o.Fecha > hora && o.Fecha < man).OrderByDescending(o => o.Fecha).ToList();
+                if(citas.Count == 10)
+                {
+                    return hora;
+                }
+                if(citas.Count() > 0)
+                {
+                    return hora.AddHours(citas.FirstOrDefault().Fecha.Hour + 1);
+                }
+                else
+                {
+                    return hora.AddHours(8);
+                }
+
+            }
+            catch(Exception ex)
+            {
+                return hora;
             }
         }
 
